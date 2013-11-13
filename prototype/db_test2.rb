@@ -19,11 +19,9 @@ unless ctable.find( 'name' => course ).one
 	ctable.insert 'name' => course
 end
 
-session = '13/11/2013'
+session = '13-11-2013'
 unless stable.find( 'date' => session ).one
-	stable.insert 'date' => session
-	stable.insert 'course' => course
-	stable.insert 'attended' => 'user1,user5,user7'
+	stable.insert 'date' => session, 'course' => course, 'attended' => 'user1,user5,user7'
 end
 
 db.save
