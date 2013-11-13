@@ -22,7 +22,7 @@ class Table
     #end
 
     # a search function, which can be given a hash of parameters
-    # to filter the table on. If the table is a cortesian product
+    # to filter the table on. If the table is a cartesian product
     # of a few other tables, you can use hash keys as variables
     # and do things like find( 'products.owner' => 'users.id' )
     def find( parameters )
