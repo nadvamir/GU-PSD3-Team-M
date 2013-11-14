@@ -56,6 +56,7 @@ class Table
     # in a very much NoSQL fashion, it does not care for consistency
     # so it is again up to user.
     def insert( record )
+        record['id'] = (Time.now.to_f * 1000000).to_i unless record.has_key? 'id'
         @table.push record
         @actual_table.push record unless @table == @actual_table
     end
