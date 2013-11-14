@@ -21,8 +21,10 @@ while line = attfile.gets
 	for s in sess.all
 		if (theD>DateTime.parse(s.to_hash['start_date'].to_s) && theD<DateTime.parse(s.to_hash['end_date'].to_s))
 			puts 'importing attendance'
-			
+			s.set 'attended' => s.to_hash['attended'].to_s+','+stuff[0]
+			puts s.to_hash['attended'].to_s
 		end
 	end
 	
-end	
+end
+db.save
