@@ -20,9 +20,10 @@ while line = attfile.gets
 	#time to insert attendance into sessions!
 	for s in sess.all
 		if (theD>DateTime.parse(s.to_hash['start_date'].to_s) && theD<DateTime.parse(s.to_hash['end_date'].to_s))
-			puts 'importing attendance'
-			s.set 'attended' => s.to_hash['attended'].to_s+','+stuff[0]
-			puts s.to_hash['attended'].to_s
+			if (!s.to_hash['attended'].to_s.split(',').include? stuff[0])
+				puts 'importing attendance'
+				s.set 'attended' => s.to_hash['attended'].to_s+','+stuff[0]
+			end
 		end
 	end
 	
