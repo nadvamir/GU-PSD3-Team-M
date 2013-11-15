@@ -16,7 +16,7 @@ class Record
         parameters.each { |field, value| @record[ field ] = value }
     end
 
-    # get the hash representation for accessing the fieds
+    # get the hash representation for accessing the fields
     def to_hash
         @record
     end

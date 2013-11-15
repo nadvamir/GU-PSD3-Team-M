@@ -11,6 +11,12 @@ db.select_db 'prototype'
 # intro text
 UI.line
 puts "The Prototype. (c) Team M, 2013"
+UI.line
+
+# login
+username = UI.enter("Enter username")
+password = UI.enter("Enter password")
+login(username, password)
 
 # main loop
 msg = "Choose what you want to do:"

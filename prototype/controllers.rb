@@ -2,6 +2,10 @@ require_relative 'ui'
 require_relative 'db'
 require 'date'
 
+def login( username, password )
+  puts "I guess we'll trust you. For now."
+end
+
 def export_course_data
     puts "Exporting the course data"
 end
@@ -55,21 +59,71 @@ end
 # Handle manual attendance alterations
 def record_attendance_manual( db )
   labs = db.table("labs")
+  
+  # Display labs
   for lab in labs.all
     puts lab.to_hash['id'].to_s
   end
-  
+  # Enter lab to update
+  UI.line
   labchoice = UI.enter( "Enter the lab you wish to update" )
   labsessions = db.tables("lab_sessions", "labs")
+  
+  ## TESTING FIND FUNCTION ##
+  #filteredlabsessions = labsessions.find('lab_sessions.lab_id' => 'labs.id')
+  #for session in labsessions.all
+  #  puts "ahhhh"
+  #  if session.to_hash['labs.id'].to_s == labchoice
+  #    puts "filtered   "+session.to_hash['lab_sessions.start_date'].to_s+"   ID: "+session.to_hash['lab_sessions.id'].to_s
+  #  end
+  #end
+  
+  # Display lab sessions for that lab
   for session in labsessions.all
-    # THIS DOESN'T WORK
     if (session.to_hash['lab_sessions.lab_id'].to_s == session.to_hash['labs.id'].to_s) && (session.to_hash['labs.id'].to_s == labchoice)
-      puts session.to_hash['start_date'].to_s+"   ID: "+session.to_hash['id']
+      puts session.to_hash['lab_sessions.start_date'].to_s+"   ID: "+session.to_hash['lab_sessions.id'].to_s
+    end
+  end
+  # Enter session to update
+  UI.line
+  sessionchoice = UI.enter( "Enter the ID of the session you wish to update" )
+  
+  # Get list of students who have currently attended session
+  # Get list of students enroleed in the session
+  for session in labsessions.all
+    if (session.to_hash['lab_sessions.lab_id'].to_s == session.to_hash['labs.id'].to_s) && (session.to_hash['lab_sessions.id'].to_s == sessionchoice)
+      attendees = session.to_hash['lab_sessions.attended'].to_s
+      enrolled = session.to_hash['labs.enrolled'].to_s
     end
   end
   
-  sessionschoice = UI.enter( "Enter the ID of the session you wish to update" )
-  sessions = db.tables("lab_sessions")
+  # Display students who have attended session
+  puts "Current attendees: "
+  for attendee in attendees.split(',')
+    puts attendee
+  end
+  # Display absent students
+  puts "Current absentees: "
+  for student in enrolled.split(',')
+    puts student unless attendees.include?(student)
+  end
   
-  puts "Recording attendance manually"
+  msg = "Attendance Monitoring\nChoose what you want to do:"
+  options = {
+      :a => "Add student to attended",
+      :r => "Remove student from attended",
+      :q => "Quit attendance recording"
+  }
+  
+  begin
+    UI.line
+    option = UI.choose msg, options
+    case option
+    when :a
+      puts "Adding student to attendance"
+    when :r
+      puts "Removing student from attendance"
+    end
+  end until  option == :q
+  
 end
