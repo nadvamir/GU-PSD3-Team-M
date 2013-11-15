@@ -54,9 +54,22 @@ end
 
 # Handle manual attendance alterations
 def record_attendance_manual( db )
-  userlabs = db.tables( "users", "labs", "labs_sessions" )
-  for record in userlabs
-    # if record.to_hash["users.id"] 
+  labs = db.table("labs")
+  for lab in labs.all
+    puts lab.to_hash['id'].to_s
   end
+  
+  labchoice = UI.enter( "Enter the lab you wish to update" )
+  labsessions = db.tables("lab_sessions", "labs")
+  for session in labsessions.all
+    # THIS DOESN'T WORK
+    if (session.to_hash['lab_sessions.lab_id'].to_s == session.to_hash['labs.id'].to_s) && (session.to_hash['labs.id'].to_s == labchoice)
+      puts session.to_hash['start_date'].to_s+"   ID: "+session.to_hash['id']
+    end
+  end
+  
+  sessionschoice = UI.enter( "Enter the ID of the session you wish to update" )
+  sessions = db.tables("lab_sessions")
+  
   puts "Recording attendance manually"
 end

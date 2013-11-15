@@ -22,10 +22,6 @@ unless ctable.find( 'name' => course ).one
 	ctable.insert 'name' => course, 'id' => course_id
 end
 
-for i in 0..4
-  ltable.insert 'course_id' => course_id
-end
-
 session1s = DateTime.parse('11:00:00 31/10/2013')
 session1e = DateTime.parse('12:00:00 31/10/2013')
 session2s = DateTime.parse('12:00:00 31/10/2013')
