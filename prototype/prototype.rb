@@ -27,7 +27,7 @@ begin
     when :e
         export_course_data
     when :a
-        record_attendance
+        record_attendance(db)
     end
 end until option == :q
 
