@@ -116,47 +116,38 @@ def record_attendance_manual( db )
       :q => "Quit attendance recording"
   }
   begin
-    sessions = db.tables('lab_sessions')
+    sessions = db.table('lab_sessions')
     UI.line
     option = UI.choose msg, options
     
     case option
     # Adding student to database
-    # NOT WORKING
     when :a
       addstudent = UI.enter("Enter the ID of the student to add")
       for session in sessions.all
-        puts "got here"
         if (session.to_hash['id'].to_s == sessionchoice)
-          # THIS CODE IS NEVER REACHED?
           attended = session.to_hash['attended'].to_s+","+addstudent
           puts attended
-          session.set({:attended => attended})
+          session.set 'attended' => attended
         end
       end
       puts "Adding student to attendance"
       
     # Removing student from database
-    # NOT WORKING
     when :r
       remstudent = UI.enter("Enter the ID of the student to remove")
       for session in sessions.all
-        puts "got here"
         if (session.to_hash['id'].to_s == sessionchoice)
-          # THIS CODE IS NEVER REACHED?
           attended = ""
-          # Iterate through students and create a new string, ommiting student to be removed
-          for student in session.to_hash['attended'].to_s.split(',')
-            if student != remstudent
-              if attended == ""
-                attended = student
-              end
-            else
-              attended = attended+","+student
-            end
-          end
+          # Create array of students, remove the element representing the student that must be removed, recreate string from remaining elements
+          attar = session.to_hash['attended'].to_s.split(',')
+		  attar.delete(remstudent)
+		  for s in attar
+			attended = attended+s+','
+		  end
+		  attended = attended.chomp(',')
           puts attended
-          session.set({:attended => attended})
+          session.set 'attended' => attended
         end
       end
       puts "Removing student from attendance"
