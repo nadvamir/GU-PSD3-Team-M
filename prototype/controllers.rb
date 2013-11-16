@@ -52,7 +52,7 @@ def record_attendance_barcode( db )
   		end
   	end
   end
-  db.save   # Needed?
+  db.save   # Needed? If you want it to actually modify and save the database in the json file, yes :D
   
 end
 
