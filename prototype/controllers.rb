@@ -1,13 +1,70 @@
 require_relative 'ui'
 require_relative 'db'
 require 'date'
+require 'set'
 
 def login( username, password )
   puts "I guess we'll trust you. For now."
 end
 
-def export_course_data
-    puts "Exporting the course data"
+def export_course_data( db )
+    puts "Exporting the course data for all students for a chosen course"
+	puts "Available courses: "
+	courses = db.table( 'courses' )
+	labs = db.table( 'labs' )
+	users = db.table( 'users' )
+	sess = db.table( 'lab_sessions' )
+	
+	for c in courses.all
+		puts c.to_hash['name'].to_s
+	end
+	course = UI.enter( "Enter course to export data for" )
+	for c in courses.all
+		if (c.to_hash['name'].to_s == course)
+			courseID = c.to_hash['id'].to_s
+		end
+	end
+	filename = UI.enter( "Enter the name of the file to be exported" )
+	exfile = File.new(filename,'w')
+	#get students enrolled on course by seeing which students are enrolled on the courses' labs
+	ens = Set.new
+
+	for l in labs.all
+		if (l.to_hash['course_id'].to_s == courseID) 
+			for en in l.to_hash['enrolled'].to_s.split(',')
+				ens.add(en)
+			end
+		end
+	end
+	#start exporting them and their attendance
+	for stu in ens
+		for u in users.all
+			if (u.to_hash['id'].to_s == stu) 
+				sname = u.to_hash['name'].to_s
+			end
+		end
+		enin = Array.new
+		for l in labs.all
+			if (l.to_hash['enrolled'].to_s.split(',').include? stu) 
+				enin.push(l.to_hash['id'])
+			end
+		end
+		exfile.syswrite(sname+','+stu)
+		for s in sess.all
+			if (enin.include? s.to_hash['lab_id'].to_s)
+				if (s.to_hash['attended'].to_s.split(',').include? stu)
+					exfile.syswrite(',present')
+				else
+					exfile.syswrite(',absent')
+				end
+			end
+		end
+		exfile.syswrite("\n")
+	end
+end
+
+def export_student_data( db )
+	puts "Exporting the student data for all courses"
 end
 
 def record_attendance( db )
@@ -20,7 +77,7 @@ def record_attendance( db )
       record_attendance_barcode( db )
   else
       record_attendance_manual( db )
-    end
+  end
 end
 
 # Handle csv import for attendance
@@ -52,8 +109,6 @@ def record_attendance_barcode( db )
   		end
   	end
   end
-  db.save   # Needed? If you want it to actually modify and save the database in the json file, yes :D
-  
 end
 
 # Handle manual attendance alterations
@@ -89,7 +144,7 @@ def record_attendance_manual( db )
   sessionchoice = UI.enter( "Enter the ID of the session you wish to update" )
   
   # Get list of students who have currently attended session
-  # Get list of students enroleed in the session
+  # Get list of students enrolled in the session
   for session in labsessions.all
     if (session.to_hash['lab_sessions.lab_id'].to_s == session.to_hash['labs.id'].to_s) && (session.to_hash['lab_sessions.id'].to_s == sessionchoice)
       attendees = session.to_hash['lab_sessions.attended'].to_s

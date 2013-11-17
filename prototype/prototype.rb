@@ -31,7 +31,7 @@ begin
     option = UI.choose msg, options
     case option
     when :e
-        export_course_data
+        export_course_data(db)
     when :a
         record_attendance(db)
     end
