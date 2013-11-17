@@ -65,6 +65,63 @@ end
 
 def export_student_data( db )
 	puts "Exporting the student data for all courses"
+
+	puts "Available students: "
+	courses = db.table( 'courses' )
+	labs = db.table( 'labs' )
+	users = db.table( 'users' )
+	sess = db.table( 'lab_sessions' )
+	
+	for s in users.all
+		puts s.to_hash['name'].to_s
+	end
+	student = UI.enter( "Enter student to export data for" )
+	for s in users.all
+		if (s.to_hash['name'].to_s == student)
+			studentID = s.to_hash['id'].to_s
+		end
+	end
+	filename = UI.enter( "Enter the name of the file to be exported (preferably including the student name or ID)" )
+	exfile = File.new(filename,'w')
+	
+	#get courses and labs student is enrolled on
+	cenin = Set.new
+	lenin = Set.new
+
+	for l in labs.all
+		if (l.to_hash['enrolled'].to_s.split(',').include? studentID)
+			cenin.add(l.to_hash['course_id'].to_s)
+			lenin.add(l.to_hash['id'].to_s)
+		end
+	end
+	
+	#export
+	for c in cenin
+		for co in courses.all
+			if (co.to_hash['id'].to_s == c) 
+				cname = co.to_hash['name'].to_s
+				for labid in lenin
+					exfile.syswrite(cname+','+c)
+					for lab in labs.all
+						if (lab.to_hash['course_id'].to_s == c && lab.to_hash['id'].to_s == labid)
+							for s in sess.all
+								if (s.to_hash['lab_id'].to_s==labid)
+									exfile.syswrite(','+labid)
+									if (s.to_hash['attended'].to_s.split(',').include? studentID)
+										exfile.syswrite(',present')
+									else
+										exfile.syswrite(',absent')
+									end
+								end
+							end
+						end
+					end
+					exfile.syswrite("\n")
+				end
+			end
+		end
+		
+	end
 end
 
 def record_attendance( db )
@@ -73,10 +130,23 @@ def record_attendance( db )
   
   # Handle choice
   UI.line
+  if UI.confirm(msg)   
+	  record_attendance_barcode( db )
+  else     
+	  record_attendance_manual( db )
+  end
+end
+
+def export_stuff( db )
+  # course or student?
+  msg = "Export all information for a course? (No will export all information for a student)"
+  
+  # Handle choice
+  UI.line
   if UI.confirm(msg)
-      record_attendance_barcode( db )
+      export_course_data( db )
   else
-      record_attendance_manual( db )
+      export_student_data( db )
   end
 end
 
