@@ -4,124 +4,106 @@ require 'date'
 require 'set'
 
 def login( username, password )
-  puts "I guess we'll trust you. For now."
+    puts "I guess we'll trust you. For now."
 end
 
 def export_course_data( db )
     puts "Exporting the course data for all students for a chosen course"
-	puts "Available courses: "
-	courses = db.table( 'courses' )
-	labs = db.table( 'labs' )
-	users = db.table( 'users' )
-	sess = db.table( 'lab_sessions' )
-	
-	for c in courses.all
-		puts c.to_hash['name'].to_s
-	end
-	course = UI.enter( "Enter course to export data for" )
-	for c in courses.all
-		if (c.to_hash['name'].to_s == course)
-			courseID = c.to_hash['id'].to_s
-		end
-	end
-	filename = UI.enter( "Enter the name of the file to be exported" )
-	exfile = File.new(filename,'w')
-	#get students enrolled on course by seeing which students are enrolled on the courses' labs
-	ens = Set.new
+    puts "Available courses: "
+    courses = db.table( 'courses' )
+    labs = db.table( 'labs' )
+    users = db.table( 'users' )
+    sess = db.table( 'lab_sessions' )
+    
+    for c in courses.all
+        puts c.to_hash['name']
+    end
+    course = UI.enter( "Enter course to export data for" )
+    courseID = courses.find( 'name' => course ).one.to_hash['id']
 
-	for l in labs.all
-		if (l.to_hash['course_id'].to_s == courseID) 
-			for en in l.to_hash['enrolled'].to_s.split(',')
-				ens.add(en)
-			end
-		end
-	end
-	#start exporting them and their attendance
-	for stu in ens
-		for u in users.all
-			if (u.to_hash['id'].to_s == stu) 
-				sname = u.to_hash['name'].to_s
-			end
-		end
-		enin = Array.new
-		for l in labs.all
-			if (l.to_hash['enrolled'].to_s.split(',').include? stu) 
-				enin.push(l.to_hash['id'])
-			end
-		end
-		exfile.syswrite(sname+','+stu)
-		for s in sess.all
-			if (enin.include? s.to_hash['lab_id'].to_s)
-				if (s.to_hash['attended'].to_s.split(',').include? stu)
-					exfile.syswrite(',present')
-				else
-					exfile.syswrite(',absent')
-				end
-			end
-		end
-		exfile.syswrite("\n")
-	end
+    filename = UI.enter( "Enter the name of the file to be exported" )
+    exfile = File.new(filename,'w')
+
+    #get students enrolled on course by seeing which students are enrolled on the courses' labs
+    ens = Set.new
+    for l in labs.find( 'course_id' => courseID ).all
+        for en in l.to_hash['enrolled'].split(',')
+            ens.add(en)
+        end
+    end
+
+    #start exporting them and their attendance
+    for stu in ens
+        sname = users.find( 'id' => stu ).one.to_hash['name']
+
+        enin = Array.new
+        for l in labs.all
+            if (l.to_hash['enrolled'].split(',').include? stu) 
+                enin.push(l.to_hash['id'])
+            end
+        end
+
+        exfile.syswrite( "#{sname},#{stu}" )
+        for s in sess.all
+            if (enin.include? s.to_hash['lab_id'])
+                if (s.to_hash['attended'].split(',').include? stu)
+                    exfile.syswrite(',present')
+                else
+                    exfile.syswrite(',absent')
+                end
+            end
+        end
+        exfile.syswrite("\n")
+    end
 end
 
 def export_student_data( db )
-	puts "Exporting the student data for all courses"
+    puts "Exporting the student data for all courses"
 
-	puts "Available students: "
-	courses = db.table( 'courses' )
-	labs = db.table( 'labs' )
-	users = db.table( 'users' )
-	sess = db.table( 'lab_sessions' )
-	
-	for s in users.all
-		puts s.to_hash['name'].to_s
-	end
-	student = UI.enter( "Enter student to export data for" )
-	for s in users.all
-		if (s.to_hash['name'].to_s == student)
-			studentID = s.to_hash['id'].to_s
-		end
-	end
-	filename = UI.enter( "Enter the name of the file to be exported (preferably including the student name or ID)" )
-	exfile = File.new(filename,'w')
-	
-	#get courses and labs student is enrolled on
-	cenin = Set.new
-	lenin = Set.new
+    puts "Available students: "
+    courses = db.table( 'courses' )
+    labs = db.table( 'labs' )
+    users = db.table( 'users' )
+    sess = db.table( 'lab_sessions' )
+    
+    for s in users.all
+        puts s.to_hash['name']
+    end
+    student = UI.enter( "Enter student to export data for" )
+    studentID = users.find( 'name' => student ).one.to_hash['id']
 
-	for l in labs.all
-		if (l.to_hash['enrolled'].to_s.split(',').include? studentID)
-			cenin.add(l.to_hash['course_id'].to_s)
-			lenin.add(l.to_hash['id'].to_s)
-		end
-	end
-	
-	#export
-	for c in cenin
-		for co in courses.all
-			if (co.to_hash['id'].to_s == c) 
-				cname = co.to_hash['name'].to_s
-				for labid in lenin
-					exfile.syswrite(cname+','+c)
-					for lab in labs.all
-						if (lab.to_hash['course_id'].to_s == c && lab.to_hash['id'].to_s == labid)
-							for s in sess.all
-								if (s.to_hash['lab_id'].to_s==labid)
-									exfile.syswrite(','+labid)
-									if (s.to_hash['attended'].to_s.split(',').include? studentID)
-										exfile.syswrite(',present')
-									else
-										exfile.syswrite(',absent')
-									end
-								end
-							end
-						end
-					end
-					exfile.syswrite("\n")
-				end
-			end
-		end
-		
-	end
+    filename = UI.enter( "Enter the name of the file to be exported (preferably including the student name or ID)" )
+    exfile = File.new(filename,'w')
+    
+    #get courses and labs student is enrolled on
+    cenin = Set.new
+    lenin = Set.new
+
+    for l in labs.all
+        if (l.to_hash['enrolled'].split(',').include? studentID)
+            cenin.add(l.to_hash['course_id'])
+            lenin.add(l.to_hash['id'])
+        end
+    end
+    
+    #export
+    for c in cenin
+        cname = courses.find( 'id' => c ).one.to_hash['name']
+        for labid in lenin
+            exfile.syswrite( "#{cname},#{c}" )
+            for lab in labs.find( 'course_id' => c, 'id' => labid ).all
+                for s in sess.find( 'lab_id' => labid ).all
+                    exfile.syswrite(",#{labid}")
+                    if (s.to_hash['attended'].split(',').include? studentID)
+                            exfile.syswrite(',present')
+                    else
+                            exfile.syswrite(',absent')
+                    end
+                end
+            end
+            exfile.syswrite("\n")
+        end
+    end
 end
 
 def record_attendance( db )
@@ -171,10 +153,10 @@ def record_attendance_barcode( db )
   	theD = DateTime.parse(time+' '+date)
   	#time to insert attendance into sessions!
   	for s in sess.all
-  		if (theD>DateTime.parse(s.to_hash['start_date'].to_s) && theD<DateTime.parse(s.to_hash['end_date'].to_s))
-  			if (!s.to_hash['attended'].to_s.split(',').include? stuff[0])
+  		if (theD>DateTime.parse(s.to_hash['start_date']) && theD<DateTime.parse(s.to_hash['end_date']))
+  			unless s.to_hash['attended'].split(',').include? stuff[0]
   				puts 'importing attendance'
-  				s.set 'attended' => s.to_hash['attended'].to_s+','+stuff[0]
+  				s.set 'attended' => s.to_hash['attended']+','+stuff[0]
   			end
   		end
   	end
@@ -187,7 +169,7 @@ def record_attendance_manual( db )
   
   # Display labs
   for lab in labs.all
-    puts lab.to_hash['id'].to_s
+    puts lab.to_hash['id']
   end
   # Enter lab to update
   UI.line
@@ -204,10 +186,8 @@ def record_attendance_manual( db )
   #end
   
   # Display lab sessions for that lab
-  for session in labsessions.all
-    if (session.to_hash['lab_sessions.lab_id'].to_s == session.to_hash['labs.id'].to_s) && (session.to_hash['labs.id'].to_s == labchoice)
-      puts session.to_hash['lab_sessions.start_date'].to_s+"   ID: "+session.to_hash['lab_sessions.id'].to_s
-    end
+  for session in labsessions.find( 'lab_sessions.lab_id' => 'labs.id', 'labs.id' => labchoice ).all
+      puts "#{session.to_hash['lab_sessions.start_date']}   ID: #{session.to_hash['lab_sessions.id']}"
   end
   # Enter session to update
   UI.line
@@ -215,12 +195,9 @@ def record_attendance_manual( db )
   
   # Get list of students who have currently attended session
   # Get list of students enrolled in the session
-  for session in labsessions.all
-    if (session.to_hash['lab_sessions.lab_id'].to_s == session.to_hash['labs.id'].to_s) && (session.to_hash['lab_sessions.id'].to_s == sessionchoice)
-      attendees = session.to_hash['lab_sessions.attended'].to_s
-      enrolled = session.to_hash['labs.enrolled'].to_s
-    end
-  end
+  session = labsessions.find( 'lab_sessions.lab_id' => 'labs.id', 'lab_sessions.id' => sessionchoice.to_i ).one
+  attendees = session.to_hash['lab_sessions.attended']
+  enrolled = session.to_hash['labs.enrolled']
   
   # Display students who have attended session
   puts "Current attendees: "
@@ -249,32 +226,26 @@ def record_attendance_manual( db )
     # Adding student to database
     when :a
       addstudent = UI.enter("Enter the ID of the student to add")
-      for session in sessions.all
-        if (session.to_hash['id'].to_s == sessionchoice)
-          attended = session.to_hash['attended'].to_s+","+addstudent
-          puts attended
-          session.set 'attended' => attended
-        end
-      end
+      session = sessions.find( 'id' => sessionchoice ).one
+      attended = "#{session.to_hash['attended']},#{addstudent}"
+      puts attended
+      session.set 'attended' => attended
       puts "Adding student to attendance"
       
     # Removing student from database
     when :r
       remstudent = UI.enter("Enter the ID of the student to remove")
-      for session in sessions.all
-        if (session.to_hash['id'].to_s == sessionchoice)
-          attended = ""
-          # Create array of students, remove the element representing the student that must be removed, recreate string from remaining elements
-          attar = session.to_hash['attended'].to_s.split(',')
-		  attar.delete(remstudent)
-		  for s in attar
-			attended = attended+s+','
-		  end
-		  attended = attended.chomp(',')
-          puts attended
-          session.set 'attended' => attended
-        end
+      session = sessions.find( 'id' => sessionchoice ).one
+      attended = ""
+      # Create array of students, remove the element representing the student that must be removed, recreate string from remaining elements
+      attar = session.to_hash['attended'].split(',')
+      attar.delete(remstudent)
+      for s in attar
+            attended = attended+s+','
       end
+      attended = attended.chomp(',')
+      puts attended
+      session.set 'attended' => attended
       puts "Removing student from attendance"
     end
   end until  option == :q

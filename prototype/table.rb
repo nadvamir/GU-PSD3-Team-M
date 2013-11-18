@@ -30,7 +30,7 @@ class Table
             accept = true
             parameters.each do |field, value|
                 # simple query
-                unless value.include? '.'
+                unless value.is_a? String and value.include? '.'
                     accept = false unless r.has_key? field and r[ field ] == value
                 # value is another field
                 else
