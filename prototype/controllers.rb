@@ -192,10 +192,11 @@ def record_attendance_manual( db )
   # Enter session to update
   UI.line
   sessionchoice = UI.enter( "Enter the ID of the session you wish to update" )
+  sessionchoice = sessionchoice.to_i
   
   # Get list of students who have currently attended session
   # Get list of students enrolled in the session
-  session = labsessions.find( 'lab_sessions.lab_id' => 'labs.id', 'lab_sessions.id' => sessionchoice.to_i ).one
+  session = labsessions.find( 'lab_sessions.lab_id' => 'labs.id', 'lab_sessions.id' => sessionchoice ).one
   attendees = session.to_hash['lab_sessions.attended']
   enrolled = session.to_hash['labs.enrolled']
   
