@@ -1,0 +1,7 @@
+ACTION													URL
+Show home												GET "/"
+Show timetable for all time								GET "/timetable/"
+Show timetable for one week								GET "/timetable/week/"
+Show timetable for one day								GET "/timetable/day/"
+Show form for new session								GET "/create/"
+Submit session to create, redirect to "/timetable/"		POST "/doCreate/"
