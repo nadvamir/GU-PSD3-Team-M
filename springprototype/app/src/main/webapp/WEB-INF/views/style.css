@@ -89,9 +89,16 @@ table th, table td {
 }
 
 table td {
+	position: relative;
 	cursor: pointer;
 }
 
 table td h1 {
 	font-size: 20px;
+}
+
+.deleter {
+	position: absolute;
+	top: 5px;
+	right: 5px;
 }
