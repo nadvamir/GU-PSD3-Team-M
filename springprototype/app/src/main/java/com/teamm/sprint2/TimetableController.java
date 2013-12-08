@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
  */
 @Controller
 public class TimetableController {
-	private String[] courses = {"Course1", "Course2", "Course3", "Course4", "Course5"};
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
@@ -33,9 +32,8 @@ public class TimetableController {
 		String formattedDate = dateFormat.format(date);
 		
 		model.addAttribute("serverTime", formattedDate );
-		model.addAttribute("courses", courses);
 		
-		return "timetable";
+		return "timetable-all";
 	}
 	
 }

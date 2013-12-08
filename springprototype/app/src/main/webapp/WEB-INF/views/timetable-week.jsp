@@ -11,18 +11,18 @@
 	<!--[if lt IE 9]><script src="html5shiv.js"></script><![endif]-->
 	<script>
 		cal = new Calendar({
-		  cols: ['Today'],
+		  cols: ['Mo', 'Tu', 'We', 'Th', 'Fr'],
 		  rows: ['8:00', '9:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00', '18:00']
 		});
 		
 		sessions = [
-			['Today', '9:00', 'Test Course', 'Boyd Orr 420', 2, 'Dr. Watson'],
-			['Today', '12:00', 'Another Course', 'Boyd Orr 716', 1, 'Dr. Hyde'],
+			['Tu', '9:00', 'Test Course', 'Boyd Orr 420', 2, 'Dr. Watson'],
+			['Th', '12:00', 'Another Course', 'Boyd Orr 716', 1, 'Dr. Hyde'],
 		];
 		cal.addSessions( sessions )
 		
 		$(document).ready(function() {
-		  return $('#day-timetable').append(cal.render());
+		  return $('#week-timetable').append(cal.render());
 		});
 	</script>
 </head>
@@ -30,12 +30,12 @@
 	<div id="page">
 		<header><h1>Student Information System</h1></header>
 		<div id="timetable-links">
-			<a href="http://localhost:8080/sprint2/timetable-week/">Weekly timetable</a>
+			<a href="http://localhost:8080/sprint2/timetable-day/">Daily timetable</a>
 			<br />
 			<a href="http://localhost:8080/sprint2/timetable/">All courses</a>
 		</div>
-		<h1>Today you have</h1>
-		<div id="day-timetable"></div>
+		<h1>This week you have</h1>
+		<div id="week-timetable"></div>
 		<div id="dummy"></div>
 		<footer>© Team M, 2013</footer>
 	</div>

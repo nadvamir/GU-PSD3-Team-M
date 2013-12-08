@@ -16,16 +16,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
  */
 @Controller
 public class WeekTimetableController {
-	private String[] courses = {"Course1", "Course2", "Course3"};
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
-	@RequestMapping(value = "/timetable/week/", method = RequestMethod.GET)
+	@RequestMapping(value = "/timetable-week/", method = RequestMethod.GET)
 	public String timetable(Locale locale, Model model) {
-		logger.info("Viewing timetable. The client locale is {}.", locale);
+		logger.info("Viewing weekly timetable. The client locale is {}.", locale);
 		
 		Date date = new Date();
 		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
@@ -33,9 +32,8 @@ public class WeekTimetableController {
 		String formattedDate = dateFormat.format(date);
 		
 		model.addAttribute("serverTime", formattedDate );
-		model.addAttribute("courses", courses);
 		
-		return "timetable/week";
+		return "timetable-week";
 	}
 	
 }
