@@ -70,7 +70,11 @@ $(document).ready(function() {
 </head>
 <body>
 	<div id="page">
-		<header><h1>Student Information System</h1></header>
+		<header>
+			<a href="http://localhost:8080/sprint2/">Logout</a>
+			<br />
+			<h1>Student Information System</h1>
+		</header>
 
 		
 		<div id="session-adder">
