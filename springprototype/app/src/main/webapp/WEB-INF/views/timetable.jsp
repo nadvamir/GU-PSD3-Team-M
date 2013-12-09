@@ -5,9 +5,9 @@
 	<title>Team M</title>
 	<meta charset="UTF-8"/>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" /> 
-	<link rel="stylesheet" type="text/css" href="../resources/style.css">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/style.css">
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-	<script src="../resources/calendar.js"></script>
+	<script src="${pageContext.request.contextPath}/static/js/calendar.js"></script>
 	<!--[if lt IE 9]><script src="html5shiv.js"></script><![endif]-->
 	<script>
 		cal = new Calendar({

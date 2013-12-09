@@ -5,9 +5,9 @@
 	<title>Team M</title>
 	<meta charset="UTF-8"/>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" /> 
-	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/static/css/style.css">
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-	<script src="calendar.js"></script>
+	<script src="${pageContext.request.contextPath}/static/js/calendar.js"></script>
 	<!--[if lt IE 9]><script src="html5shiv.js"></script><![endif]-->
 	<script>
 
@@ -102,7 +102,7 @@ $(document).ready(function() {
 		<h1>Week 10: 18/11/2013</h1>
 		<div id="day-timetable"></div>
 		<div id="dummy"></div>
-		<footer>Â© Team M, 2013</footer>
+		<footer>© Team M, 2013</footer>
 	</div>
 </body>
 </html>
