@@ -1,5 +1,7 @@
 package components.mcwrapper;
 
+import java.util.ArrayList;
+
 public interface MyCampusWrapper {
     /**
      * Establish secure connection to MyCampus
