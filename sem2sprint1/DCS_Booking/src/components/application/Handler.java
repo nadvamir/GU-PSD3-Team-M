@@ -1,9 +1,10 @@
 package components.application;
 
+import java.util.HashMap;
 import components.login.User;
 
 public abstract class Handler {
-    protected HashMap<User.Type, boolean> allowedUsers;
+    protected HashMap<User.Type, Boolean> allowedUsers;
 
     public Handler(User.Type... allowed) {
         for (User.Type u: allowed) {

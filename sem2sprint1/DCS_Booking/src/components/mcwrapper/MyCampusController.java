@@ -2,7 +2,7 @@ package components.mcwrapper;
 
 import java.util.ArrayList;
 
-public class MyCampusController extends MyCampusWrapper {
+public class MyCampusController implements MyCampusWrapper {
     /**
      * Establish secure connection to MyCampus
      * so that allows us to query the data.
@@ -64,6 +64,5 @@ public class MyCampusController extends MyCampusWrapper {
         }
 
         throw new Exception("Course was not found");
-        return null;
     }
 }

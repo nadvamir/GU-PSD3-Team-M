@@ -7,6 +7,7 @@ import org.osgi.framework.ServiceRegistration;
 public class Activator implements BundleActivator{
 	
 	private Authenticator authenticator;
+        private ServiceRegistration<Login> authenticatorRegistration;
 	
 	@Override
 	public void start(BundleContext context)

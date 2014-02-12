@@ -1,8 +1,9 @@
-package components.mcwrapper;
+package components.application;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
+import org.osgi.framework.ServiceRegistration;
 
 import components.application.handlers.*;
 import components.login.Login;
@@ -17,7 +18,7 @@ public class Activator implements BundleActivator {
     public void start(BundleContext context) throws Exception {
         // creating the application
         app = new ApplicationImpl();
-        wrapperRegistration = context.registerService(
+        appRegistration = context.registerService(
             Application.class, app, null
         );
 
@@ -42,6 +43,8 @@ public class Activator implements BundleActivator {
         ServiceReference<Login> loginReference =
             context.getServiceReference(Login.class);
         Login loginRH = context.getService(loginReference);
-        app.registerHandler("login", new LoginHandler(loginRH, User.GUEST));
+        app.registerHandler(
+            "login", new LoginHandler(loginRH, User.Type.GUEST)
+        );
     }
 }
