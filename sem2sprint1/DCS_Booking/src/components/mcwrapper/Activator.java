@@ -7,8 +7,7 @@ import org.osgi.framework.ServiceReference;
 public class Activator implements BundleActivator {
     private MyCampusController wrapper;
 
-    private ServiceRegistration<MyCampusWrapper> 
-        wrapperRegistration;
+    private ServiceRegistration<MyCampusWrapper> wrapperRegistration;
     
     @Override
     public void start(BundleContext context) throws Exception {
@@ -23,7 +22,6 @@ public class Activator implements BundleActivator {
 
     @Override
     public void stop(BundleContext arg0) throws Exception {
-        monitor.stopMonitoring();
         wrapper.disconnect();
         wrapperRegistration.unregister();
     }

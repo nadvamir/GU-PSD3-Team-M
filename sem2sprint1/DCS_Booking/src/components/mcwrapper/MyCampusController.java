@@ -1,5 +1,7 @@
 package components.mcwrapper;
 
+import java.util.ArrayList;
+
 public class MyCampusController extends MyCampusWrapper {
     /**
      * Establish secure connection to MyCampus
