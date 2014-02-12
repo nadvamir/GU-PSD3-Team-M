@@ -3,7 +3,7 @@ package components.login;
 public class User {
 	
 	private String username;
-	public enum Type {ADMIN, LECTURER, TUTOR, STUDENT};
+	public enum Type {ADMIN, LECTURER, TUTOR, STUDENT, GUEST};
 	private Type type;
 	
 	public User(String username, Type type) {

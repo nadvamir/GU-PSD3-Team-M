@@ -84,6 +84,15 @@
 		
 		</jar>		
 
+		<jar update="no" destfile="application.jar" manifest="config/osgi/APPLICATION.MF">
+		
+			<fileset 
+				dir="bin/" 
+				includes="components/application/*.class"
+			/>
+		
+		</jar>
+
 	</target>
 	
 	
