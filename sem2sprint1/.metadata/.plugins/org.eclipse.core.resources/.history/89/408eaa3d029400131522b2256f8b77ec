@@ -1,0 +1,5 @@
+package components.database;
+
+public class Session {
+
+}
