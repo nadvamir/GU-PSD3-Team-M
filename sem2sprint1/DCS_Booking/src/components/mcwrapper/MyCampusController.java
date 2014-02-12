@@ -41,7 +41,7 @@ public class MyCampusController extends MyCampusWrapper {
             "Algorithmic Foundations"
         };
 
-        for (int i = 0; i < names.length(); i++) {
+        for (int i = 0; i < names.length; i++) {
             courses.add(new MyCampusCourse(names[i], fullNames[i]));
         }
 
@@ -58,7 +58,7 @@ public class MyCampusController extends MyCampusWrapper {
         ArrayList<MyCampusCourse> courses = getAllCourses();
 
         for (MyCampusCourse c: courses) {
-            if (c.getName().equals(name)) {
+            if (c.getTitle().equals(name)) {
                 return c;
             }
         }
