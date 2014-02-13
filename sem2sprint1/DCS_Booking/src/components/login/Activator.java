@@ -18,11 +18,6 @@ public class Activator implements BundleActivator{
 		
 		authenticatorRegistration = context.registerService(Login.class, authenticator, null);
 		
-        ServiceReference<Login> loginReference =
-                context.getServiceReference(Login.class);
-        
-        System.out.println(loginReference);
-		
 		System.out.println("Login service has started");
 	}	
 

@@ -24,12 +24,16 @@ public class Activator implements BundleActivator {
 
 		bookingHandlerRegistration = context.registerService(Booker.class, handler, null);
 		
+		System.out.println("Booking service has started");
+		
 	}
 
 	@Override
 	public void stop(BundleContext context) throws Exception {
 		
 		bookingHandlerRegistration.unregister();
+		
+		System.out.println("Booking service has stopper");
 		
 	}
 
