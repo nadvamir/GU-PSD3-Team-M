@@ -102,6 +102,24 @@
 		
 		</jar>
 
+		<jar update="no" destfile="booking.jar" manifest="config/osgi/BOOKING.MF">
+		
+			<fileset 
+				dir="bin/" 
+				includes="components/booking/*.class"
+			/>
+		
+		</jar>		
+
+		<jar update="no" destfile="database.jar" manifest="config/osgi/DATABASE.MF">
+		
+			<fileset 
+				dir="bin/" 
+				includes="components/database/*.class"
+			/>
+		
+		</jar>	
+
 	</target>
 	
 	
