@@ -61,7 +61,7 @@ public class Activator implements BundleActivator {
         CourseManager courseEditorService = context.getService(courseEditorReference);
 		try {
 			app.registerHandler(
-				    "courseEditor", new CourseEditorHandler(courseEditorService, User.Type.GUEST)
+				    "courseEditor", new CourseManagerHandler(courseEditorService, User.Type.GUEST)
 			);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block

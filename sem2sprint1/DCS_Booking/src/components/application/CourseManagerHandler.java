@@ -3,10 +3,10 @@ package components.application;
 import components.coursemanager.CourseManager;
 import components.database.User;
 
-public class CourseEditorHandler extends Handler {
+public class CourseManagerHandler extends Handler {
 	private CourseManager courseEditor;
 	
-	public CourseEditorHandler(CourseManager courseEditor,  User.Type... allowed) {
+	public CourseManagerHandler(CourseManager courseEditor,  User.Type... allowed) {
         super(allowed);
         this.courseEditor = courseEditor;
 	}
@@ -16,9 +16,9 @@ public class CourseEditorHandler extends Handler {
 		checkAccess(u);
 		
 		String command = args[0];
-		switch (command) {
-			case "getAllCourses":
-				courseEditor.getAllCourses();
+		
+		if (command.equals("getAllCourses")) {
+			courseEditor.getAllCourses();
 		}
 		
 	}
