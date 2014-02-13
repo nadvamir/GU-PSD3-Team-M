@@ -12,34 +12,35 @@ import java.util.Map;
  * @author tws
  * 
  */
-public class UserHandler implements UserAdd, UserQuery {
+public class CourseHandler implements CourseAdd, CourseQuery {
 	
-	private String tableName = "user";
+	private String tableName = "course";
 		
 	private DBMS dbms;
 	
-	public UserHandler (DBMS dbms) throws SQLException {
+	public CourseHandler (DBMS dbms) throws SQLException {
 		
 		this.dbms = dbms;
-		if (!userTableExists())
-			createUserTable();
+		if (!courseTableExists())
+			createCourseTable();
 	}
 	
 	@Override
-	public User	getUser(String name) {
-		User wanted = null;
+	public Course getCourse(String id) {
+		Course wanted = null;
 		ResultSet resultSet = null;
 		
 		try {
 			
-			String condition = "name='"+name+"'";
+			String condition = "id='"+id+"'";
 			
 			resultSet =	dbms.getRows(tableName, condition);
 			while (resultSet.next()) {
 				wanted = parseRow(resultSet);
 			}
+			
+			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally{
 			try{
@@ -55,25 +56,27 @@ public class UserHandler implements UserAdd, UserQuery {
 		
 	}
 
-	private User parseRow(ResultSet resultSet) throws SQLException {
+	private Course parseRow(ResultSet resultSet) throws SQLException {
+		
+		String id = resultSet.getString("id");
 		
 		String name = resultSet.getString("name");
 		
-		int type = resultSet.getInt("type");
+		//TODO: get sessions
 		
-		User r = new User(name,User.IntToType(type));
+		Course r = new Course(id,name);
 		
 		return r;
 	}
 	
 
 	@Override
-	public void	addUser(User u){		
+	public void	addCourse(Course c){		
 		try {		
 			Map<String, Object> values = new HashMap<String,Object>();
 			
-			values.put("name", u.getUsername());
-			values.put("type", User.TypeToInt(u.getType()));
+			values.put("id", c.getId());
+			values.put("name", c.getTitle());
 			
 			dbms.insertRow(tableName,values);			
 		} catch (SQLException e) {
@@ -82,15 +85,15 @@ public class UserHandler implements UserAdd, UserQuery {
 		}
 	}
 	
-	private Boolean userTableExists() throws SQLException {
+	private Boolean courseTableExists() throws SQLException {
 		return dbms.tableExists(tableName);
 	}
 	
-	private void createUserTable() throws SQLException {
+	private void createCourseTable() throws SQLException {
 		String fields =
-			"name VARCHAR(100) NOT NULL," +
-			"type INT NOT NULL," +
-			"PRIMARY KEY(name)";	
+			"id VARCHAR(100) NOT NULL," +
+			"title VARCHAR(250) NOT NULL," +
+			"PRIMARY KEY(id)";	
 		dbms.createTable(tableName, fields);
 	}
 	

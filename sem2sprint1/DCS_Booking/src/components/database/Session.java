@@ -7,6 +7,7 @@ public class Session {
 	private String id;
 	private boolean compulsory;
 	private ArrayList<TimetableSlot> slots;
+	
 	public String getId() {
 		return id;
 	}

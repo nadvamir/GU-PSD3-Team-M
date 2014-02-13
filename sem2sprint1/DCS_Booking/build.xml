@@ -40,6 +40,8 @@
 		name="resolve"
 		description="Retrieves necessary dependencies for this project."
 	>
+
+      <ivy:retrieve />
 			
 	</target>
 	
@@ -119,6 +121,15 @@
 			/>
 		
 		</jar>	
+		
+		<jar update="no" destfile="roomassignment.jar" manifest="config/osgi/ROOMASSIGNMENT.MF">
+		
+			<fileset 
+				dir="bin/" 
+				includes="components/roomassignment/*.class"
+			/>
+		
+		</jar>
 
 	</target>
 	
