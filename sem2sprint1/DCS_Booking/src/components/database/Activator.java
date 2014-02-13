@@ -27,7 +27,9 @@ public class Activator implements BundleActivator {
 		
 		userAddRegistration = context.registerService(UserAdd.class, add, null);	
 		
-		userQueryRegistration = context.registerService(UserQuery.class, query, null);	
+		userQueryRegistration = context.registerService(UserQuery.class, query, null);
+		
+		System.out.println("Database service has started");
 	}	
 
 	@Override
@@ -36,5 +38,6 @@ public class Activator implements BundleActivator {
 		userAddRegistration.unregister();
 		userQueryRegistration.unregister();
 		
+		System.out.println("Database service has stopped");
 	}
 }

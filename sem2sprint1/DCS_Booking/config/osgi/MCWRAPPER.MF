@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: A wrapper to get MyCampus courses
+Bundle-Name: DCS. A wrapper to get MyCampus courses
 Bundle-SymbolicName: components.mcwrapper
 Bundle-Version: 1.0.0
 Bundle-Activator: components.mcwrapper.Activator

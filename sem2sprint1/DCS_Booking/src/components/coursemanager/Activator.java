@@ -5,13 +5,13 @@ import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
 import org.osgi.framework.ServiceRegistration;
 
-import components.login.Login;
-import components.mcwrapper.MyCampusController;
+import components.database.DBMS;
 import components.mcwrapper.MyCampusWrapper;
 
 public class Activator implements BundleActivator {
 
 	private CourseManagerImpl courseManager;
+	private DBMS dbms;
 	
 	private ServiceRegistration<CourseManager> courseEditorRegistration;
 
@@ -20,7 +20,8 @@ public class Activator implements BundleActivator {
 		
 		ServiceReference<MyCampusWrapper> mcReference =
                 context.getServiceReference(MyCampusWrapper.class);
-		MyCampusWrapper mcController = context.getService(mcReference);		
+		MyCampusWrapper mcController = context.getService(mcReference);
+		
 		
 		courseManager = new CourseManagerImpl(mcController); 
 		
