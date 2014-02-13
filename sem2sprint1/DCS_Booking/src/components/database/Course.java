@@ -8,6 +8,12 @@ public class Course {
 	private String title;
 	private ArrayList<Session> sessions;
 	
+	public Course(String id, String title){
+		this.id = id;
+		this.title = title;
+		this.sessions = new ArrayList<Session>();
+	}
+	
 	public Course(String id, String title, ArrayList<Session> sessions) {
 		this.id = id;
 		this.title = title;
