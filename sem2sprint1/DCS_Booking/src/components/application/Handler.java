@@ -7,6 +7,7 @@ public abstract class Handler {
     protected HashMap<User.Type, Boolean> allowedUsers;
 
     public Handler(User.Type... allowed) {
+    	allowedUsers = new HashMap<User.Type, Boolean>();
         for (User.Type u: allowed) {
             allowedUsers.put(u, true);
         }

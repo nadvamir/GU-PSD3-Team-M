@@ -6,24 +6,26 @@ import org.osgi.framework.ServiceRegistration;
 
 public class Activator implements BundleActivator {
 
-	private CourseEditorImpl courseEditor;
+	private CourseManagerImpl courseEditor;
 	
-	private ServiceRegistration<CourseEditor> courseEditorRegistration;
+	private ServiceRegistration<CourseManager> courseEditorRegistration;
 
 	@Override
 	public void start(BundleContext context) throws Exception {
-		System.out.println("hello 2");
 		
-		courseEditor = new CourseEditorImpl(); 
+		courseEditor = new CourseManagerImpl(); 
 		
 		courseEditorRegistration = context.registerService(
-				CourseEditor.class, courseEditor, null);	
+				CourseManager.class, courseEditor, null);	
 		
+		System.out.println("Course manager service has started");
 	}
 
 	@Override
 	public void stop(BundleContext context) throws Exception {
 		courseEditorRegistration.unregister();
+		
+		System.out.println("Course manager service has stopped");
 		
 	}
 	

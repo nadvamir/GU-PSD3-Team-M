@@ -1,6 +1,5 @@
-package components.application.handlers;
+package components.application;
 
-import components.application.Handler;
 import components.login.User;
 import components.login.Login;
 

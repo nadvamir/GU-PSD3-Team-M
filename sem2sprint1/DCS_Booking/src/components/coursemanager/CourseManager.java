@@ -4,7 +4,7 @@ import java.util.List;
 
 import components.database.Course;
 
-public interface CourseEditor {
+public interface CourseManager {
 
 	public List<Course> getAllCourses();
 }

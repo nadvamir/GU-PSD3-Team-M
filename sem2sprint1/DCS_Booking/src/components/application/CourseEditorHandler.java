@@ -1,13 +1,12 @@
-package components.application.handlers;
+package components.application;
 
-import components.application.Handler;
-import components.coursemanager.CourseEditor;
+import components.coursemanager.CourseManager;
 import components.login.User;
 
 public class CourseEditorHandler extends Handler {
-	private CourseEditor courseEditor;
+	private CourseManager courseEditor;
 	
-	public CourseEditorHandler(CourseEditor courseEditor,  User.Type... allowed) {
+	public CourseEditorHandler(CourseManager courseEditor,  User.Type... allowed) {
         super(allowed);
         this.courseEditor = courseEditor;
 	}

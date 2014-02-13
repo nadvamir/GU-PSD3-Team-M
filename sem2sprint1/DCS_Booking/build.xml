@@ -18,6 +18,15 @@
 
 
 	<target
+		name="clean"
+		description="Deletes all intermediate files."
+	>
+		
+		<delete dir="bin" />
+	
+	</target>
+
+	<target
 		name="init"
 		description="Initalises the distribution in preparation for compilation of code and documentation."
 	>

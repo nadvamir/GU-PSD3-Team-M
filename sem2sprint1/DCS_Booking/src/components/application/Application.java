@@ -1,5 +1,7 @@
 package components.application;
 
+
+
 public interface Application {
     /**
      * Run a specified command.

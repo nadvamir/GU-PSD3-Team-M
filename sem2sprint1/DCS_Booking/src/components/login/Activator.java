@@ -2,6 +2,7 @@ package components.login;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
+import org.osgi.framework.ServiceReference;
 import org.osgi.framework.ServiceRegistration;
 
 public class Activator implements BundleActivator{
@@ -16,6 +17,13 @@ public class Activator implements BundleActivator{
 		authenticator = new Authenticator();
 		
 		authenticatorRegistration = context.registerService(Login.class, authenticator, null);
+		
+        ServiceReference<Login> loginReference =
+                context.getServiceReference(Login.class);
+        
+        System.out.println(loginReference);
+		
+		System.out.println("Login service has started");
 	}	
 
 	@Override
@@ -23,6 +31,8 @@ public class Activator implements BundleActivator{
 		throws Exception {
 		
 		authenticatorRegistration.unregister();
+		
+		System.out.println("Login service has stopped");
 	}
 	
 

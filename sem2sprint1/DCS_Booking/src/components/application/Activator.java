@@ -5,8 +5,7 @@ import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
 import org.osgi.framework.ServiceRegistration;
 
-import components.application.handlers.*;
-import components.coursemanager.CourseEditor;
+import components.coursemanager.CourseManager;
 import components.login.Login;
 import components.login.User;
 
@@ -28,11 +27,15 @@ public class Activator implements BundleActivator {
 
         // authorising as a student or whatever really
         app.runCmd("login", "Whatever", "pass of sorts");
+        
+        System.out.println("Main Application has started");
     }
 
     @Override
     public void stop(BundleContext arg0) throws Exception {
         appRegistration.unregister();
+        
+        System.out.println("Main Application has stopped");
     }
 
     /**
@@ -51,11 +54,11 @@ public class Activator implements BundleActivator {
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		} 
         
-        ServiceReference<CourseEditor> courseEditorReference =
-                context.getServiceReference(CourseEditor.class);
-        CourseEditor courseEditorService = context.getService(courseEditorReference);
+        ServiceReference<CourseManager> courseEditorReference =
+                context.getServiceReference(CourseManager.class);
+        CourseManager courseEditorService = context.getService(courseEditorReference);
 		try {
 			app.registerHandler(
 				    "courseEditor", new CourseEditorHandler(courseEditorService, User.Type.GUEST)

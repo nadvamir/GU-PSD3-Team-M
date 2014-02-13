@@ -5,7 +5,7 @@ import java.util.List;
 
 import components.database.Course;
 
-public class CourseEditorImpl implements CourseEditor {
+public class CourseManagerImpl implements CourseManager {
 
 	@Override
 	public List<Course> getAllCourses() {

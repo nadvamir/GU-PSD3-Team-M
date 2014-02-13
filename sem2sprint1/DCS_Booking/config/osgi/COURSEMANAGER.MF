@@ -3,6 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: DCS Booking System Course Manager
 Bundle-SymbolicName: components.coursemanager
 Bundle-Version: 1.0.0
+Bundle-Activator: components.coursemanager.Activator
 Bundle-Vendor: University of Glasgow
 Bundle-Localization: plugin
 Import-Package: org.osgi.framework;version="1.3.0"
