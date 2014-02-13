@@ -14,6 +14,8 @@ public class LoginHandler extends Handler {
 
     public void run(User u, String... args) throws Exception {
         checkAccess(u);
-        handler.loginCheck(args[0], args[1]);
+        User nu = handler.loginCheck(args[0], args[1]);
+        u.setUsername(nu.getUsername());
+        u.setType(nu.getType());
     }
 }
