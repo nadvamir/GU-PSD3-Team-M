@@ -1,5 +1,6 @@
 package components.database;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 public class TimetableSlot {
@@ -7,14 +8,14 @@ public class TimetableSlot {
 	private Date date;
 	private int capacity;
 	private String room;
-	private User[] students;
+	private ArrayList<User> students;
 	private User tutor;
 	
 	public TimetableSlot(Date date, int capacity, String room) {
 		this.date = date;
 		this.capacity = capacity;
 		this.room = room;
-		this.students = new User[capacity];
+		this.students = new ArrayList<User>();
 	}
 	
 	public Date getDate() {
@@ -38,7 +39,7 @@ public class TimetableSlot {
 		this.room = room;
 	}
 	
-	public User[] getStudents() {
+	public ArrayList<User> getStudents() {
 		return students;
 	}
 	
