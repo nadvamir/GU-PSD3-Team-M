@@ -7,7 +7,7 @@ import org.osgi.framework.ServiceRegistration;
 
 import components.coursemanager.CourseManager;
 import components.login.Login;
-import components.login.User;
+import components.database.User;
 
 public class Activator implements BundleActivator {
     private ApplicationImpl app;

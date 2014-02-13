@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Session {
 
 	private String id;
-	private boolean compulsary;
+	private boolean compulsory;
 	private ArrayList<TimetableSlot> slots;
 	public String getId() {
 		return id;
@@ -13,11 +13,11 @@ public class Session {
 	public void setId(String id) {
 		this.id = id;
 	}
-	public boolean isCompulsary() {
-		return compulsary;
+	public boolean isCompulsory() {
+		return compulsory;
 	}
-	public void setCompulsary(boolean compulsary) {
-		this.compulsary = compulsary;
+	public void setCompulsary(boolean compulsory) {
+		this.compulsory = compulsory;
 	}
 	public ArrayList<TimetableSlot> getSlots() {
 		return slots;

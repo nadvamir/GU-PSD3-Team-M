@@ -1,6 +1,7 @@
 package components.login;
 
-import components.login.User.Type;
+import components.database.User;
+import components.database.User.Type;
 
 public class Authenticator implements Login {
 
