@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: A DCS Booking application main controller
+Bundle-Name: DCS Booking application main controller
 Bundle-SymbolicName: components.application
 Bundle-Version: 1.0.0
 Bundle-Activator: components.application.Activator

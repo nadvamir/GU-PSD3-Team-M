@@ -48,6 +48,8 @@ public class Activator implements BundleActivator {
 		sessionAddRegistration = context.registerService(SessionAdd.class, addS, null);	
 		
 		sessionQueryRegistration = context.registerService(SessionQuery.class, queryS, null);
+
+		System.out.println("Database service has started");
 	}	
 
 	@Override
@@ -59,5 +61,7 @@ public class Activator implements BundleActivator {
 		courseQueryRegistration.unregister();
 		sessionAddRegistration.unregister();
 		sessionQueryRegistration.unregister();
+
+		System.out.println("Database service has stopped");
 	}
 }
