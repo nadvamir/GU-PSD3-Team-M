@@ -19,11 +19,15 @@ public class Activator implements BundleActivator {
         );
 
         wrapper.authorise();
+        
+        System.out.println("MyCampus wrapper service has started");
     }
 
     @Override
     public void stop(BundleContext arg0) throws Exception {
         wrapper.disconnect();
         wrapperRegistration.unregister();
+        
+        System.out.println("MyCampus wrapper service has stopped");
     }
 }
