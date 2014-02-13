@@ -8,7 +8,7 @@ import org.osgi.framework.ServiceRegistration;
 import components.application.handlers.*;
 import components.coursemanager.CourseEditor;
 import components.login.Login;
-import components.login.User;
+import components.database.User;
 
 public class Activator implements BundleActivator {
     private ApplicationImpl app;

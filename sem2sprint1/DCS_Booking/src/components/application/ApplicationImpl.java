@@ -1,7 +1,7 @@
 package components.application;
 
 import java.util.HashMap;
-import components.login.User;
+import components.database.User;
 
 public class ApplicationImpl implements Application {
     private HashMap<String, Handler> handlers;

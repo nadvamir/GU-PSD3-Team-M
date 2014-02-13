@@ -2,7 +2,7 @@ package components.application.handlers;
 
 import components.application.Handler;
 import components.coursemanager.CourseEditor;
-import components.login.User;
+import components.database.User;
 
 public class CourseEditorHandler extends Handler {
 	private CourseEditor courseEditor;
