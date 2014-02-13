@@ -89,7 +89,7 @@ public class UserHandler implements UserAdd, UserQuery {
 	private void createUserTable() throws SQLException {
 		String fields =
 			"name VARCHAR(100) NOT NULL," +
-			"type INT," +
+			"type INT NOT NULL," +
 			"PRIMARY KEY(name)";	
 		dbms.createTable(tableName, fields);
 	}

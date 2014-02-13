@@ -7,12 +7,24 @@ import org.osgi.framework.ServiceRegistration;
 public class Activator implements BundleActivator {
 
 	private DBMS dbms;
-	private UserAdd add;
-	private UserQuery query;
+	private UserAdd addU;
+	private UserQuery queryU;
+	private CourseAdd addC;
+	private CourseQuery queryC;
+	private SessionAdd addS;
+	private SessionQuery queryS;
 	
 	private ServiceRegistration<UserAdd> userAddRegistration;
 	
 	private ServiceRegistration<UserQuery> userQueryRegistration;
+	
+	private ServiceRegistration<CourseAdd> courseAddRegistration;
+	
+	private ServiceRegistration<CourseQuery> courseQueryRegistration;	
+	
+	private ServiceRegistration<SessionAdd> sessionAddRegistration;
+	
+	private ServiceRegistration<SessionQuery> sessionQueryRegistration;
 	
 	@Override
 	public void start(BundleContext context)
@@ -22,12 +34,20 @@ public class Activator implements BundleActivator {
 		
 		UserHandler handler = new UserHandler(dbms);
 		
-		add = handler;
-		query = handler;
+		addU = handler;
+		queryU = handler;
 		
-		userAddRegistration = context.registerService(UserAdd.class, add, null);	
+		userAddRegistration = context.registerService(UserAdd.class, addU, null);	
 		
-		userQueryRegistration = context.registerService(UserQuery.class, query, null);	
+		userQueryRegistration = context.registerService(UserQuery.class, queryU, null);
+		
+		courseAddRegistration = context.registerService(CourseAdd.class, addC, null);	
+		
+		courseQueryRegistration = context.registerService(CourseQuery.class, queryC, null);
+		
+		sessionAddRegistration = context.registerService(SessionAdd.class, addS, null);	
+		
+		sessionQueryRegistration = context.registerService(SessionQuery.class, queryS, null);
 	}	
 
 	@Override
@@ -35,6 +55,9 @@ public class Activator implements BundleActivator {
 		dbms.stop();
 		userAddRegistration.unregister();
 		userQueryRegistration.unregister();
-		
+		courseAddRegistration.unregister();
+		courseQueryRegistration.unregister();
+		sessionAddRegistration.unregister();
+		sessionQueryRegistration.unregister();
 	}
 }
