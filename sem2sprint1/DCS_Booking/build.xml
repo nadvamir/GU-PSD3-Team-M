@@ -75,6 +75,15 @@
 		
 		</jar>
 
+		<jar update="no" destfile="coursemanager.jar" manifest="config/osgi/COURSEMANAGER.MF">
+		
+			<fileset 
+				dir="bin/" 
+				includes="components/coursemanager/*.class"
+			/>
+		
+		</jar>		
+
 		<jar update="no" destfile="application.jar" manifest="config/osgi/APPLICATION.MF">
 		
 			<fileset 
