@@ -1,4 +1,4 @@
-package components.login;
+package components.database;
 
 public class User {
 	
