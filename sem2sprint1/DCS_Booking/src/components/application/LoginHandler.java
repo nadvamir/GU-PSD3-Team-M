@@ -1,7 +1,7 @@
 package components.application;
 
 import components.application.Handler;
-import components.login.User;
+import components.database.User;
 import components.login.Login;
 
 public class LoginHandler extends Handler {
