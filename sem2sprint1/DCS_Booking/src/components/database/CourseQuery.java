@@ -2,7 +2,7 @@ package components.database;
 
 public interface CourseQuery {
 	/**
-	 * Gets an user by unique username from the database
+	 * Gets a course with a given ID
 	 */
 	public Course getCourse(String id);
 }

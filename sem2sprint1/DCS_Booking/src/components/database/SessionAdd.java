@@ -2,7 +2,7 @@ package components.database;
 
 public interface SessionAdd {
 	/**
-	 * Adds an user to the database
+	 * Adds a session to the database linked to a given course
 	 */
 	public void addSession(Session c, String cid);
 }
