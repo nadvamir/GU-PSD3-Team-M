@@ -24,6 +24,18 @@ public class User {
 		this.type = type;
 	}
 	
+	public boolean equals(Object o) {
+		if (o == null) return false;
+		else if (o.getClass() != getClass()) return false;
+		else {
+			User u = (User) o;
+			if (!u.username.equals(this.username)) return false;
+		}
+		return true;
+	}
 	
+	public String toString() {
+		return username;
+	}
 
 }

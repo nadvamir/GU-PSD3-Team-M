@@ -37,5 +37,12 @@ public interface Booker {
 	 * @return ArrayList of compulsory Sessions that student hasn't signed up for or null if there are none
 	 */
 	public ArrayList<Session> getSessionsNeeded(User student, Course[] courses);
+	
+	/**
+	 * 
+	 * @param ts is TimetableSlot being queried for info
+	 * @return a string containing time, location, students and tutor
+	 */
+	public String getInfo(TimetableSlot ts);
 
 }
