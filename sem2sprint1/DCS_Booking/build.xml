@@ -40,6 +40,8 @@
 		name="resolve"
 		description="Retrieves necessary dependencies for this project."
 	>
+
+      <ivy:retrieve />
 			
 	</target>
 	
