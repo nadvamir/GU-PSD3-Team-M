@@ -5,17 +5,13 @@ import java.util.List;
 
 import components.database.Course;
 
-public class CourseEditorHandler implements CourseEditor {
+public class CourseEditorImpl implements CourseEditor {
 
 	@Override
 	public List<Course> getAllCourses() {
+		System.out.println("trololo");
 		List<Course> list = new ArrayList<Course>();
 		return list;
-	}
-	
-	@Override
-	public String toString() {
-		return "Hello, I am a Course Editor";
 	}
 
 }

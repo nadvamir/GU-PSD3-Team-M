@@ -6,6 +6,7 @@ import org.osgi.framework.ServiceReference;
 import org.osgi.framework.ServiceRegistration;
 
 import components.application.handlers.*;
+import components.coursemanager.CourseEditor;
 import components.login.Login;
 import components.login.User;
 
@@ -43,8 +44,26 @@ public class Activator implements BundleActivator {
         ServiceReference<Login> loginReference =
             context.getServiceReference(Login.class);
         Login loginRH = context.getService(loginReference);
-        app.registerHandler(
-            "login", new LoginHandler(loginRH, User.Type.GUEST)
-        );
+        try {
+			app.registerHandler(
+			    "login", new LoginHandler(loginRH, User.Type.GUEST)
+			);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        
+        ServiceReference<CourseEditor> courseEditorReference =
+                context.getServiceReference(CourseEditor.class);
+        CourseEditor courseEditorService = context.getService(courseEditorReference);
+		try {
+			app.registerHandler(
+				    "courseEditor", new CourseEditorHandler(courseEditorService, User.Type.GUEST)
+			);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+            
     }
 }

@@ -5,17 +5,19 @@ import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceRegistration;
 
 public class Activator implements BundleActivator {
-		
-	private ServiceRegistration<CourseEditor> 
-		courseEditorRegistration;
+
+	private CourseEditorImpl courseEditor;
+	
+	private ServiceRegistration<CourseEditor> courseEditorRegistration;
 
 	@Override
 	public void start(BundleContext context) throws Exception {
+		System.out.println("hello 2");
 		
-		CourseEditorHandler courseEditorHandler = new CourseEditorHandler(/*courseManager*/); 
+		courseEditor = new CourseEditorImpl(); 
 		
 		courseEditorRegistration = context.registerService(
-				CourseEditor.class, courseEditorHandler, null);	
+				CourseEditor.class, courseEditor, null);	
 		
 	}
 
