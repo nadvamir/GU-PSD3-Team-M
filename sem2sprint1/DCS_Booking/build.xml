@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 
 <project
-	name="dcs.booking"
 	basedir="."
-	xmlns:ivy="antlib:org.apache.ivy.ant"
 	default="build"
+	xmlns:ivy="antlib:org.apache.ivy.ant"
+	name="dcs.booking"
 >
 	
 	
@@ -23,8 +23,24 @@
 	>
 		
 		<delete dir="bin" />
-	
+		<delete dir="jbehave"/>
 	</target>
+
+	<target
+		name="cleanall"
+		depends="clean"
+		description="Deletes all compiled files and cached dependencies."
+		>
+		
+		<delete dir="lib" />
+
+		<delete>
+			<fileset dir="." includes="*.jar" />
+		</delete>
+
+		<ivy:cleancache />
+
+	</target>	
 
 	<target
 		name="init"
@@ -32,6 +48,12 @@
 	>
 		
 		<mkdir dir="bin"/>
+
+		<copy todir="bin">
+			
+			<fileset dir="src" includes="**/*.story"/>
+			
+		</copy>		
 		
 	</target>
 
@@ -41,7 +63,25 @@
 		description="Retrieves necessary dependencies for this project."
 	>
 
-      <ivy:retrieve />
+    	<ivy:retrieve />
+
+		<unzip
+			src="lib/jbehave-core-3.9-resources-3.9.zip"
+			dest="jbehave/view"
+		>
+			<patternset>
+				<include name="**/*.*"/>
+			</patternset>
+		</unzip>
+		
+		<unzip
+			src="lib/jbehave-site-resources-3.1.1.zip"
+			dest="jbehave/view"
+		>
+			<patternset>
+				<include name="**/*.*"/>
+			</patternset>
+		</unzip>      
 			
 	</target>
 	
@@ -61,6 +101,40 @@
 	
 	</target>
 	
+	<target
+		name="test.init"
+		depends="compile"
+		description="Prepares the jbehave directory with view resources for the HTML view of the JBehave tests."
+	>
+		<mkdir dir="jbehave/view"/>
+		
+		<unzip
+			src="lib/jbehave-core-3.9-resources-3.9.zip"
+			dest="jbehave/view"
+		/>
+		
+		<unzip
+			src="lib/jbehave-site-resources-3.1.1.zip"
+			dest="jbehave/view"
+		/>
+			
+	</target>
+		
+	
+	<target
+		name="test"
+		depends="build, test.init"
+		description="Runs jbehave tests"
+	>
+		
+		<junit>
+			
+			<test name="components.tests.Stories.java"/>
+			<classpath refid="project.classpath"/>
+		</junit>
+				
+	</target>
+
 	
 	<target
 		name="bundles"
@@ -186,12 +260,5 @@
 	/>
 	
 	
-	<target
-		name="test"
-		depends="build"
-	>
 		
-	
-	</target>
-	
 </project>
