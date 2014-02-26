@@ -7,10 +7,7 @@ import java.util.Map;
 
 /**
  * A wrapper around the raw database management system for
- * reporting and querying temperature readings.
- * 
- * @author tws
- * 
+ * adding and getting users.
  */
 public class UserHandler implements UserAdd, UserQuery {
 	

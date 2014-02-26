@@ -1,3 +1,8 @@
+bin/
+lib/
+jbehave/
+*.jar
+
 *.DS_Store
 *.gem
 *.rbc
