@@ -223,6 +223,18 @@ public class AllTheSteps {
   }
 
   //--------------------------------------------------------------
+  // nf_p1
+  @When("they create $count sessions for \"$course\"")
+  public void createNSessions(Integer count, String course) {
+    // TODO
+  }
+
+  @Then("\"$course\" has $count different sessions associated with it")
+  public void courseHasNSessions(String course, Integer count) {
+    // TODO
+  }
+
+  //--------------------------------------------------------------
   // nf_p2
   @Given("a database contains $count dummy users")
   public void insertUsers(Integer count) {
@@ -250,6 +262,18 @@ public class AllTheSteps {
   }
 
   //--------------------------------------------------------------
+  // nf_p3
+  @When("they create $count different slots for a \"$course\" course session")
+  public void creatingNSlotsForSession(Integer count, String course) {
+    // TODO
+  }
+
+  @Then("there are $count different slos for a \"$course\" course session")
+  public void slotsExist(Integer coun, String course) {
+    // TODO
+  }
+
+  //--------------------------------------------------------------
   // nf_p4
   @When("$count random users login to the system")
   public void usersLogin(Integer count) {
@@ -271,6 +295,4 @@ public class AllTheSteps {
   //--------------------------------------------------------------
   // nf_s1 will pretty much work if the rest will work
 
-  //--------------------------------------------------------------
-  //--------------------------------------------------------------
 }
