@@ -40,9 +40,19 @@ public class Activator implements BundleActivator {
 		UserAdd useradd = context.getService(userAddReference);
 		
 		System.out.println("Setting up test service");
-		
 
-		//steps = new AllTheSteps(context, tsquery, tsadd, sessionquery, sessionadd, coursequery, courseadd, userquery, useradd);
+    /*
+    // a hack to get components inside of the test suite
+    AllTheSteps.context = context;
+    AllTheSteps.tsquery = tsquery;
+    AllTheSteps.tsadd = tsadd;
+    AllTheSteps.sessionquery = sessionquery;
+    AllTheSteps.sessionadd = sessionadd;
+    AllTheSteps.coursequery = coursequery;
+    AllTheSteps.courseadd = courseadd;
+    AllTheSteps.userquery = userquery;
+    AllTheSteps.useradd = useradd;
+    */
 		
 	}
 

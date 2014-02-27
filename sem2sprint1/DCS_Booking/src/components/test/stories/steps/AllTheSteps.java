@@ -41,19 +41,6 @@ public class AllTheSteps {
   public static CourseAdd courseadd;
   public static UserQuery userquery;
   public static UserAdd useradd;
-  
-  
-  public AllTheSteps(BundleContext context, TSQuery tsquery, TSAdd tsadd, SessionQuery sessionquery, SessionAdd sessionadd, CourseQuery coursequery, CourseAdd courseadd, UserQuery userquery, UserAdd useradd) {
-	  this.context = context;
-	  this.tsquery = tesquery;
-	  this.tsadd = tsadd;
-	  this.sessionquery = sessionquery;
-	  this.sessionadd = sessionadd;
-	  this.coursequery = coursequery;
-	  this.courseadd = courseadd;
-	  this.userquery = userquery;
-	  this.useradd = useradd;
-  }
   */
   
 	
