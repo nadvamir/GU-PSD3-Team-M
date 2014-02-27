@@ -8,7 +8,7 @@ Given a user is a admin
 When they create a new slot
 And the slot is valid and unique
 And the admin submits the new slot to be in session VALID
-Then that slot exists in session VALID the database
+Then the slot exists in session VALID in the database
 
 Scenario: admin adding a timetable slot to a session
 Given a user is a admin
@@ -27,7 +27,7 @@ Then an exception is thrown
 Scenario: admin adding existing timetable slot to a session
 Given a user is a admin
 When they create a new slot
-And that slot already exists in session VALID
+And the slot already exists in session VALID
 And the admin submits the new slot to be in session VALID
 Then an exception is thrown
 

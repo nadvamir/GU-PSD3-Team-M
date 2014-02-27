@@ -8,7 +8,7 @@ Given a user is a lecturer
 When they create a new session
 And the session is valid and unique
 And the lecturer submits the session to be in course VALID
-Then that session exists in course VALID in the database
+Then the session exists in course VALID in the database
 
 Scenario: lecturer adding a session to a course
 Given a user is a lecturer
@@ -27,7 +27,7 @@ Then an exception is thrown
 Scenario: lecturer adding existing session to a course
 Given a user is a lecturer
 When they create a new session
-And that session already exists in course VALID
+And the session already exists in course VALID
 And the lecturer submits the session to be in course VALID
 Then an exception is thrown
 
