@@ -29,6 +29,7 @@ public class AllTheSteps {
   
   
   // ONE DATABASE INTERFACE THAT HANDLED ALL OF THESE WOULD BE GOOD!
+  // YES, IT PROBABLY WOULD BE
   
   /*
   public static BundleContext context;
@@ -176,7 +177,30 @@ public class AllTheSteps {
 		// assertThat(slots, hasItem(this.slot));
 		assertThat(1, equalTo(1));
 	}
+	/**
+	* userts story: students booking slots
+	*/
 	
+	@When("they book a slot")
+	public void studentBooksSlot() {
+		
+	}
+	
+	@When("the student has no conflicts with other slots")
+	public void studentHasNoSConflicts() {
+		
+	}
+	
+	@When("the slot is not full")
+	public void slotNotFull() {
+		
+	}
+	
+	@Then("student exists in database")
+	public void addStudentToSlot() {
+		this.slot.getStudents().add(this.user);
+	}
+
   //--------------------------------------------------------------
   // 12 story
   @When("\"$course\" is compulsory")
@@ -223,6 +247,18 @@ public class AllTheSteps {
   }
 
   //--------------------------------------------------------------
+  // nf_p1
+  @When("they create $count sessions for \"$course\"")
+  public void createNSessions(Integer count, String course) {
+    // TODO
+  }
+
+  @Then("\"$course\" has $count different sessions associated with it")
+  public void courseHasNSessions(String course, Integer count) {
+    // TODO
+  }
+
+  //--------------------------------------------------------------
   // nf_p2
   @Given("a database contains $count dummy students")
   public void insertUsers(Integer count) {
@@ -242,6 +278,18 @@ public class AllTheSteps {
 		  //if (!check.getType().equals(Type.STUDENT)) success = false;
 	  }
 	  assertThat(success, equalTo(true));
+  }
+
+  //--------------------------------------------------------------
+  // nf_p3
+  @When("they create $count different slots for a \"$course\" course session")
+  public void creatingNSlotsForSession(Integer count, String course) {
+    // TODO
+  }
+
+  @Then("there are $count different slos for a \"$course\" course session")
+  public void slotsExist(Integer coun, String course) {
+    // TODO
   }
 
   //--------------------------------------------------------------
@@ -266,6 +314,4 @@ public class AllTheSteps {
   //--------------------------------------------------------------
   // nf_s1 will pretty much work if the rest will work
 
-  //--------------------------------------------------------------
-  //--------------------------------------------------------------
 }
