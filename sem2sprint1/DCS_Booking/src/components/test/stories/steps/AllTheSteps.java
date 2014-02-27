@@ -76,7 +76,7 @@ public class AllTheSteps {
   }
 
   //--------------------------------------------------------------
-  // creating sessions
+  // 2 -- creating sessions
 	@When("they create a new session")
 	public void createSession() {
 		this.session = new Session();
@@ -119,7 +119,7 @@ public class AllTheSteps {
 	}
 	
   //--------------------------------------------------------------
-  // addig time slots
+  // 'new' adding time slots
 	@When("they create a new slot")
 	public void createSlot() {
 		this.slot = new TimetableSlot(null, 0, null);
@@ -165,7 +165,7 @@ public class AllTheSteps {
 		assertThat(1, equalTo(1));
 	}
 	/**
-	* userts story: students booking slots
+	* user story: students booking slots
 	*/
 	
 	@When("they book a slot")
@@ -237,12 +237,27 @@ public class AllTheSteps {
   // nf_p1
   @When("they create $count sessions for \"$course\"")
   public void createNSessions(Integer count, String course) {
-    // TODO
+    // this.course = getCourse(course);
+    for (int i=0; i<count; i++) {
+    	this.session = new Session();
+    	this.session.setId(String.valueOf(i));
+    	// addSession(this.session, this.course);
+    }
   }
 
   @Then("\"$course\" has $count different sessions associated with it")
   public void courseHasNSessions(String course, Integer count) {
-    // TODO
+	  Boolean success = true;
+	  // this.course = getCourse(course);
+	  ArrayList<Session> sessions = new ArrayList<Session>();
+	  for (int i=0; i<count; i++) {
+		  success = false;
+		  for (Session s: sessions) {
+			  if (s.getId().equals(String.valueOf(i))) { success = true; break; }
+		  }
+		  if (!success) break;
+	  }
+	  assertThat(success, equalTo(true));
   }
 
   //--------------------------------------------------------------
