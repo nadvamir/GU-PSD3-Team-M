@@ -106,7 +106,8 @@
 		depends="compile"
 		description="Prepares the jbehave directory with view resources for the HTML view of the JBehave tests."
 	>
-		<mkdir dir="jbehave/view"/>
+
+        <mkdir dir="jbehave/view"/>
 		
 		<unzip
 			src="lib/jbehave-core-3.9-resources-3.9.zip"
