@@ -29,6 +29,7 @@ public class AllTheSteps {
   
   
   // ONE DATABASE INTERFACE THAT HANDLED ALL OF THESE WOULD BE GOOD!
+  // YES, IT PROBABLY WOULD BE
   
   /*
   public static BundleContext context;
@@ -176,7 +177,30 @@ public class AllTheSteps {
 		// assertThat(slots, hasItem(this.slot));
 		assertThat(1, equalTo(1));
 	}
+	/**
+	* userts story: students booking slots
+	*/
 	
+	@When("they book a slot")
+	public void studentBooksSlot() {
+		
+	}
+	
+	@When("the student has no conflicts with other slots")
+	public void studentHasNoSConflicts() {
+		
+	}
+	
+	@When("the slot is not full")
+	public void slotNotFull() {
+		
+	}
+	
+	@Then("student exists in database")
+	public void addStudentToSlot() {
+		this.slot.getStudents().add(this.user);
+	}
+
   //--------------------------------------------------------------
   // 12 story
   @When("\"$course\" is compulsory")
