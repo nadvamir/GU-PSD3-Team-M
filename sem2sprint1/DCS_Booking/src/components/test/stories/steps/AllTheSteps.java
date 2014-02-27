@@ -183,7 +183,19 @@ public class AllTheSteps {
   public void userRecognised(String type) {
     // TODO
   }
+
   //--------------------------------------------------------------
+  // nf_p4
+  @When("$count random users login to the system")
+  public void usersLogin(Integer count) {
+    // TODO
+  }
+
+  @Then("a user nr $nr is recognised as a $type")
+  public void particularUserRecognised(Intger nr, String type) {
+    // TODO
+  }
+
   //--------------------------------------------------------------
   //--------------------------------------------------------------
 }
