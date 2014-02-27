@@ -14,8 +14,10 @@ public class AllTheSteps {
 
   private User user;
   private Exception e = null;
+  private Boolean boolAnsw = false;
 	
   //--------------------------------------------------------------
+  // 1st story
 	@Given("a user is a $utype")
 	public void userType(String utype) {
     if (utype.equals("admin"))
@@ -46,6 +48,7 @@ public class AllTheSteps {
   }
 
   //--------------------------------------------------------------
+  // creating sessions
 	@When("they create a new session")
 	public void createSession() {
 		//TODO
@@ -83,6 +86,7 @@ public class AllTheSteps {
 	}
 	
   //--------------------------------------------------------------
+  // addig time slots
 	@When("they create a new slot")
 	public void createSlot() {
 		//TODO
@@ -119,6 +123,30 @@ public class AllTheSteps {
 		//TODO
 	}
 	
+  //--------------------------------------------------------------
+  // 12 story
+  @When("\"$course\" is compulsory")
+  public void courseIsCompulsory(String course) {
+    // TODO
+  }
+
+  @When("a user signed up for \"$course\"")
+  public void userSignedForCourse(String course) {
+    // TODO
+  }
+
+  @When("When he asks if he has signed up for all compulsory courses")
+  public void checkForSignedUp() {
+    // TODO
+  }
+
+  @Then("a \"$answer\" answer is given")
+  public void answerIsGiven(String answer) {
+    // TODO
+  }
+  //--------------------------------------------------------------
+  //--------------------------------------------------------------
+  //--------------------------------------------------------------
   //--------------------------------------------------------------
   //--------------------------------------------------------------
 }
