@@ -362,7 +362,7 @@ public class AllTheSteps {
   }
 
   @When("they enter \"$password\" as a password")
-  public void enterUsername(String password) {
+  public void enterPassword(String password) {
     // TODO
   }
 
