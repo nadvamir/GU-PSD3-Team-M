@@ -8,6 +8,12 @@ public class Session {
 	private boolean compulsory;
 	private ArrayList<TimetableSlot> slots;
 	
+	public Session() {
+		id = null;
+		compulsory = false;
+		slots = new ArrayList<TimetableSlot>();
+	}
+	
 	public String getId() {
 		return id;
 	}
