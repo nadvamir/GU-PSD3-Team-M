@@ -1,10 +1,11 @@
-package components.tests;
+package components.test;
 
 import java.io.File;
 import java.util.List;
 
 import org.jbehave.core.io.StoryFinder;
 import org.junit.Test;
+
 
 
 public class DCSStories {
