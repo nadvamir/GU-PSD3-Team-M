@@ -1,23 +1,29 @@
 package components.test.stories.steps;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.notNullValue;
 
-import java.util.ArrayList;
+import java.sql.SQLException;
 import java.util.Date;
 
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
-import org.osgi.framework.BundleContext;
 
 import components.database.Course;
+import components.database.DBMS;
 import components.database.Session;
+import components.database.TSHandler;
 import components.database.TimetableSlot;
 import components.database.User;
 import components.database.User.Type;
+import components.roomassignment.TimetableSlotManagerImpl;
 
 public class AllTheSteps {
+
+  private DBMS dbms = new DBMS();
+  private TSHandler tsHandler;
 
   private User user;
   private Exception e = null;
@@ -26,6 +32,13 @@ public class AllTheSteps {
   private Session session;
   private TimetableSlot slot;
   private Course course;
+
+  private String room;
+  private boolean roomIsAvailable;
+  private TimetableSlot timetableSlot;
+  private boolean timetableSlotExists;
+  private boolean roomAssigned;
+  private boolean detailsAreShown;
   
   
   // ONE DATABASE INTERFACE THAT HANDLED ALL OF THESE WOULD BE GOOD!
@@ -43,9 +56,17 @@ public class AllTheSteps {
   public static UserAdd useradd;
   */
   
+    public AllTheSteps() {
+    	try {
+			tsHandler = new TSHandler(dbms);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+  
 	
   //--------------------------------------------------------------
-  // 1st story
 	@Given("a user is a $utype")
 	public void userType(String utype) {
     if (utype.equals("admin"))
@@ -60,12 +81,12 @@ public class AllTheSteps {
   		this.user = new User("guest", Type.GUEST);
 	}
 	
-  @When("he asks to import $course course from MyCampus")
+  @When("he asks to import \"$course\" course from MyCampus")
 	public void importCourse(String course) {
 		//TODO
 	}
 
-  @Then("$course course exists in the database")
+  @Then("\"$course\" course exists in the database")
 	public void checkCourse(String course) {
 		//TODO
 	}
@@ -172,6 +193,7 @@ public class AllTheSteps {
 	public void studentBooksSlot() {
 		
 	}
+	
 	
 	@When("the student has no conflicts with other slots")
 	public void studentHasNoSConflicts() {
@@ -320,5 +342,68 @@ public class AllTheSteps {
 
   //--------------------------------------------------------------
   // nf_s1 will pretty much work if the rest will work
+
+//--------------------------------------------------------------
+	@Given("a user is not an admin")
+	public void usetNotAdmin() {
+		this.user = new User("lecturer", Type.LECTURER);
+	}
+
+	@Given("a room is available")
+	public void roomIsAvailable() {
+		roomIsAvailable = true;
+		room = "room407";
+	}
+
+	@Given("a room is not available")
+	public void roomIsNotAvailable() {
+		roomIsAvailable = false;
+		room = "";
+	}
+
+	@Given("a timetable slot exists")
+	public void timetableSlotExists() {
+		timetableSlotExists = true;
+		timetableSlot = new TimetableSlot(new Date(), 100, room);
+	}	
+
+	@Given("a timetable slot does not exist")
+	public void timetableSlotDoesNotExist() {
+		timetableSlotExists = false;
+		timetableSlot = null;
+	}
+
+	@When("assigns a room to a timetable slot")
+	public void assignRoomToSlot() {
+		TimetableSlotManagerImpl manager = new TimetableSlotManagerImpl(tsHandler, tsHandler);
+		roomAssigned = manager.assignRoom(timetableSlot, room);
+	}
+
+	@Then("a room is assigned")
+	public void roomAssigned() {
+		assertThat(roomAssigned, equalTo(true));
+	}
+
+	@Then("a room is not assigned")
+	public void roomNotAssigned() {
+		assertThat(roomAssigned, equalTo(false));
+	}	
+  //--------------------------------------------------------------
+
+	@Given("any user")
+	public void anyUser() {
+		this.user = new User("lecturer", Type.LECTURER);
+	}
+
+	@When("opens the details of a timetable slot")
+	public void timetableSlotDetailsRequested() {
+		detailsAreShown = true;
+	}	
+
+	@Then("details are shown")
+	public void detailsAreShown() {
+		assertThat(detailsAreShown, equalTo(true));
+	}
+
 
 }
