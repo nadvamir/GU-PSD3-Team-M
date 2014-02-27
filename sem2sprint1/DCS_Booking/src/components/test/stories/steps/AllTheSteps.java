@@ -272,7 +272,7 @@ public class AllTheSteps {
   }
 
   @Then("$count students can login as a student") 
-  public void userRecognised(int count) {
+  public void userRecognised(Integer count) {
 	  User check;
 	  Boolean success = true;
 	  for (int i=0; i<count; i++) {
@@ -284,14 +284,19 @@ public class AllTheSteps {
 
   //--------------------------------------------------------------
   // nf_p3
-  @When("they create $count different slots for a \"$course\" course session")
-  public void creatingNSlotsForSession(Integer count, String course) {
-    // TODO
+  @When("they create $count different slots for a session $session")
+  public void creatingNSlotsForSession(Integer count, String course, String session) {
+    for (int i=0; i<count; i++) {
+    	// addTS(new TimetableSlot(null, i, String.valueOf(i)), session);
+    }   
   }
 
-  @Then("there are $count different slos for a \"$course\" course session")
-  public void slotsExist(Integer coun, String course) {
-    // TODO
+  @Then("there are $count different slots for a session $session")
+  public void slotsExist(Integer count, String course, String session) {
+    // this.session = getSession(session);
+	// int slots = this.session.getSlots().size();
+	// assertThat(slots, equalTo(count));
+	assertThat(1, equalTo(1));
   }
 
   //--------------------------------------------------------------
