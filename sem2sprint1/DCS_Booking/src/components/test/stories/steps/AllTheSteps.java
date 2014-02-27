@@ -351,6 +351,21 @@ public class AllTheSteps {
 
   //--------------------------------------------------------------
   // nf_s0
+  @When("they choose to login") 
+  public void chooseLogin() {
+    // TODO
+  }
+  
+  @When("they enter \"$username\" as a username")
+  public void enterUsername(String username) {
+    // TODO
+  }
+
+  @When("they enter \"$password\" as a password")
+  public void enterUsername(String password) {
+    // TODO
+  }
+
   @Then("a request to MyCampus is sent")
   public void requestWentToMyCampus() {
     // TODO
