@@ -9,12 +9,26 @@ import org.jbehave.core.annotations.When;
 
 import components.database.User;
 import components.database.User.Type;
+import components.database.TimetableSlot;
+import components.roomassignment.TimetableSlotManagerImpl;
+
+import java.util.Date;
 
 public class AllTheSteps {
 
   private User user;
   private Exception e = null;
-	
+
+
+  private String room;
+  private boolean roomIsAvailable;
+  private TimetableSlot timetableSlot;
+  private boolean timetableSlotExists;
+  private boolean roomAssigned;
+  private boolean detailsAreShown;
+  
+
+
   //--------------------------------------------------------------
 	@Given("a user is a $utype")
 	public void userType(String utype) {
@@ -103,7 +117,7 @@ public class AllTheSteps {
 		//TODO
 	}
 	
-	@When ("the admin submits the slot")
+	@When("the admin submits the slot")
 	public void submitSlot() {
 		//TODO
 	}
@@ -120,5 +134,64 @@ public class AllTheSteps {
 	}
 	
   //--------------------------------------------------------------
+	@Given("a user is not an admin")
+	public void usetNotAdmin() {
+		this.user = new User("lecturer", Type.LECTURER);
+	}
+
+	@Given("a room is available")
+	public void roomIsAvailable() {
+		roomIsAvailable = true;
+		room = "room407";
+	}
+
+	@Given("a room is not available")
+	public void roomIsNotAvailable() {
+		roomIsAvailable = false;
+		room = "";
+	}
+
+	@Given("a timetable slot exists")
+	public void timetableSlotExists() {
+		timetableSlotExists = true;
+		timetableSlot = new TimetableSlot(new Date(), 100, room);
+	}	
+
+	@Given("a timetable slot does not exist")
+	public void timetableSlotDoesNotExist() {
+		timetableSlotExists = false;
+		timetableSlot = null;
+	}
+
+	@When("assigns a room to a timetable slot")
+	public void assignRoomToSlot() {
+		TimetableSlotManagerImpl manager = new TimetableSlotManagerImpl();
+		roomAssigned = manager.assignRoom(timetableSlot, room);
+	}
+
+	@Then("a room is assigned")
+	public void roomAssigned() {
+		assertThat(roomAssigned, equalTo(true));
+	}
+
+	@Then("a room is not assigned")
+	public void roomNotAssigned() {
+		assertThat(roomAssigned, equalTo(false));
+	}	
   //--------------------------------------------------------------
+
+	@Given("any user")
+	public void anyUser() {
+		this.user = new User("lecturer", Type.LECTURER);
+	}
+
+	@When("opens the details of a timetable slot")
+	public void timetableSlotDetailsRequested() {
+		detailsAreShown = true;
+	}	
+
+	@Then("details are shown")
+	public void detailsAreShown() {
+		assertThat(detailsAreShown, equalTo(true));
+	}
 }

@@ -129,7 +129,7 @@
 		
 		<junit>
 			
-			<test name="components.tests.DCSStories"/>
+			<test name="components.test.DCSStories"/>
 			<classpath refid="project.classpath"/>
 		</junit>
 				
