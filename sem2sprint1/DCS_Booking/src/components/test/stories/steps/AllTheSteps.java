@@ -12,6 +12,16 @@ import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
 
+import org.osgi.framework.BundleContext;
+
+import components.database.TSQuery;
+import components.database.TSAdd;
+import components.database.SessionQuery;
+import components.database.SessionAdd;
+import components.database.CourseQuery;
+import components.database.CourseAdd;
+import components.database.UserQuery;
+import components.database.UserAdd;
 import components.database.Course;
 import components.database.DBMS;
 import components.database.Session;
@@ -20,6 +30,8 @@ import components.database.TimetableSlot;
 import components.database.User;
 import components.database.User.Type;
 import components.roomassignment.TimetableSlotManagerImpl;
+
+import components.application.Application;
 
 public class AllTheSteps {
 
@@ -45,7 +57,6 @@ public class AllTheSteps {
   // ONE DATABASE INTERFACE THAT HANDLED ALL OF THESE WOULD BE GOOD!
   // YES, IT PROBABLY WOULD BE
   
-  /*
   public static BundleContext context;
   public static TSQuery tsquery;
   public static TSAdd tsadd;
@@ -55,17 +66,17 @@ public class AllTheSteps {
   public static CourseAdd courseadd;
   public static UserQuery userquery;
   public static UserAdd useradd;
-  */
   
-    public AllTheSteps() {
-    	try {
-			tsHandler = new TSHandler(dbms);
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-	}
-  
+  public static Application app;
+
+  public AllTheSteps() {
+    try {
+      tsHandler = new TSHandler(dbms);
+    } catch (SQLException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
+  }
 	
   //--------------------------------------------------------------
 	@Given("a user is a $utype")
@@ -84,12 +95,16 @@ public class AllTheSteps {
 	
   @When("he asks to import \"$course\" course from MyCampus")
 	public void importCourse(String course) {
-		//TODO
+    try {
+      // app.runCmd("courseEditor", "import", course)
+    } catch (Exception ex) {
+      this.e = ex;
+    }
 	}
 
   @Then("\"$course\" course exists in the database")
 	public void checkCourse(String course) {
-		//TODO
+    //asertThat(coursequery.getCourse(course), notNullValue())
 	}
 
   @Then("an exception is thrown")
