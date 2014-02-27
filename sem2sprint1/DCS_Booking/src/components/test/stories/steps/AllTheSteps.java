@@ -1,26 +1,29 @@
 package components.test.stories.steps;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.notNullValue;
 
-import java.util.ArrayList;
+import java.sql.SQLException;
 import java.util.Date;
 
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
-import org.osgi.framework.BundleContext;
 
 import components.database.Course;
+import components.database.DBMS;
 import components.database.Session;
+import components.database.TSHandler;
 import components.database.TimetableSlot;
 import components.database.User;
 import components.database.User.Type;
 import components.roomassignment.TimetableSlotManagerImpl;
 
-import java.util.Date;
-
 public class AllTheSteps {
+
+  private DBMS dbms = new DBMS();
+  private TSHandler tsHandler;
 
   private User user;
   private Exception e = null;
@@ -52,6 +55,15 @@ public class AllTheSteps {
   public static UserQuery userquery;
   public static UserAdd useradd;
   */
+  
+    public AllTheSteps() {
+    	try {
+			tsHandler = new TSHandler(dbms);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
   
 	
   //--------------------------------------------------------------
@@ -343,7 +355,7 @@ public class AllTheSteps {
 
 	@When("assigns a room to a timetable slot")
 	public void assignRoomToSlot() {
-		TimetableSlotManagerImpl manager = new TimetableSlotManagerImpl();
+		TimetableSlotManagerImpl manager = new TimetableSlotManagerImpl(tsHandler, tsHandler);
 		roomAssigned = manager.assignRoom(timetableSlot, room);
 	}
 
