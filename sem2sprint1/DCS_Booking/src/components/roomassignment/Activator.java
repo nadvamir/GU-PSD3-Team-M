@@ -13,7 +13,7 @@ public class Activator implements BundleActivator {
 	@Override
 	public void start(BundleContext context) throws Exception {
 		
-		slotManager = new TimetableSlotManagerImpl(); 
+	//	slotManager = new TimetableSlotManagerImpl(); 
 		
 		slotManagerRegistration = context.registerService(
 				TimetableSlotManager.class, slotManager, null);	
