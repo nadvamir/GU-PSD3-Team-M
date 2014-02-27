@@ -144,7 +144,19 @@ public class AllTheSteps {
   public void answerIsGiven(String answer) {
     // TODO
   }
+
   //--------------------------------------------------------------
+  // nf_p0
+  @When("he asks to import $count random courses from MyCampus")
+  public void importNCourses(Integer count) {
+    // TODO
+  }
+
+  @Then("$count random courses exist in the database")
+  public void checkCoursesInDb(Integer count) {
+    // TODO
+  }
+
   //--------------------------------------------------------------
   //--------------------------------------------------------------
   //--------------------------------------------------------------
