@@ -7,6 +7,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.osgi.framework.ServiceReference;
+
 /**
  * A wrapper around the raw database management system for
  * adding and getting timetable slots
@@ -15,13 +17,14 @@ public class TSHandler implements TSAdd, TSQuery {
 	
 	private String tableName = "timetableslot";
 		
-	private DBMS dbms;
+	private static DBMS dbms;
 	
 	public TSHandler (DBMS dbms) throws SQLException {
 		
-		this.dbms = dbms;
-		if (!TSTableExists())
+		TSHandler.dbms = dbms;
+		if (!TSTableExists()) {
 			createTSTable();
+		}
 	}
 	
 	@Override
@@ -54,7 +57,7 @@ public class TSHandler implements TSAdd, TSQuery {
 		
 	}
 
-	private TimetableSlot parseRow(ResultSet resultSet) throws SQLException {
+	public static TimetableSlot parseRow(ResultSet resultSet) throws SQLException {
 		
 		Date date = resultSet.getDate("date");
 		
@@ -64,9 +67,33 @@ public class TSHandler implements TSAdd, TSQuery {
 		
 		String tutor = resultSet.getString("tutor");
 		
-		//TODO: get tutor user and add it in
+		User tutorUser = null;
 		
 		TimetableSlot r = new TimetableSlot(date,capacity,room);
+		
+		//Get the tutor
+		ResultSet tutorSet = null;
+		
+		try {
+			
+			String condition = "username='"+tutor+"'";
+			
+			tutorSet =	dbms.getRows("user", condition);
+			while (tutorSet.next()) {
+				tutorUser = UserHandler.parseRow(resultSet);
+			}
+						
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally{
+			try{
+				resultSet.close();
+			} catch(SQLException e){
+				e.printStackTrace();
+			}
+		}
+		
+		r.setTutor(tutorUser);
 
 		return r;
 	}

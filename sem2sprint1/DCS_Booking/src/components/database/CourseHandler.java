@@ -2,15 +2,13 @@ package components.database;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
 /**
  * A wrapper around the raw database management system for
- * reporting and querying temperature readings.
- * 
- * @author tws
- * 
+ * adding and getting courses
  */
 public class CourseHandler implements CourseAdd, CourseQuery {
 	
@@ -65,7 +63,25 @@ public class CourseHandler implements CourseAdd, CourseQuery {
 		//TODO: get sessions
 		
 		Course r = new Course(id,name);
-		
+		ArrayList<Session> sessions = new ArrayList<Session>();
+		try {
+			String condition = "cid='"+id+"'";
+			resultSet =	dbms.getRows("session", condition);
+			while (resultSet.next()) {
+				Session currentSession = SessionHandler.parseRow(resultSet);
+				sessions.add(currentSession);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally{
+			try{
+				resultSet.close();
+			} catch(SQLException e){
+				//TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		r.setSessions(sessions);
 		return r;
 	}
 	
