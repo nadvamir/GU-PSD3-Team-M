@@ -22,6 +22,8 @@ import org.jbehave.core.steps.ParameterConverters.DateConverter;
 import org.jbehave.core.steps.SilentStepMonitor;
 import org.jbehave.core.steps.StepMonitor;
 
+import components.test.stories.steps.DCSTest;
+
 
 public class DCSEmbedder extends Embedder {
  

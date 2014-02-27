@@ -4,20 +4,27 @@ import java.util.ArrayList;
 import java.util.Date;
 
 import components.database.Course;
+import components.database.CourseQuery;
 import components.database.Session;
+import components.database.SessionQuery;
+import components.database.TSQuery;
 import components.database.TimetableSlot;
 import components.database.User;
+import components.database.UserQuery;
 
 public class BookingHandler implements Booker {
+
+	private CourseQuery coursequery;
+	private SessionQuery sessionquery;
+	private TSQuery tsquery;
+	private UserQuery userquery;
 	
-	/* GET ACCESS TO DATABASE
-	 *
-	private DBMS dbms;
-	
-	public BookingHandler (DBMS dbms) {
-		this.dbms = dbms;
+	public BookingHandler (CourseQuery coursequery, SessionQuery sessionquery, TSQuery tsquery, UserQuery userquery) {
+		this.coursequery = coursequery;
+		this.sessionquery = sessionquery;
+		this.tsquery = tsquery;
+		this.userquery = userquery;
 	}
-	 */
 
 	@Override
 	public boolean slotIsFull(TimetableSlot ts) {

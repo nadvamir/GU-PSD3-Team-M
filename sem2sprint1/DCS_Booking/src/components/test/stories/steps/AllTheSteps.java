@@ -44,7 +44,7 @@ public class AllTheSteps {
 
   @Then("an exception is thrown")
   public void excepionThrown() {
-    assertThat(e != null);
+    assertThat(e, null);
   }
 
   //--------------------------------------------------------------
@@ -108,7 +108,7 @@ public class AllTheSteps {
 	}
 	
 	@When ("the admin submits the slot")
-	public void submitSession() {
+	public void submitSlot() {
 		//TODO
 	}
 	

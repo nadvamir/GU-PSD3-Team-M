@@ -2,7 +2,13 @@ package components.booking;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
+import org.osgi.framework.ServiceReference;
 import org.osgi.framework.ServiceRegistration;
+
+import components.database.CourseQuery;
+import components.database.SessionQuery;
+import components.database.TSQuery;
+import components.database.UserQuery;
 
 public class Activator implements BundleActivator {
 
@@ -12,15 +18,18 @@ public class Activator implements BundleActivator {
 	@Override
 	public void start(BundleContext context) throws Exception {
 		
-		/* GET ACCESS TO DATABASE
-		 * 
-		serviceReference<DBMS> serviceReference = context.getServiceReference(DBMS.class);
 		
-		DBMS dbms = context.getService(serviceReference)
-		 */
+		ServiceReference<TSQuery> TSQueryReference = context.getServiceReference(TSQuery.class);
+		ServiceReference<SessionQuery> sessionQueryReference = context.getServiceReference(SessionQuery.class);
+		ServiceReference<CourseQuery> courseQueryReference = context.getServiceReference(CourseQuery.class);
+		ServiceReference<UserQuery> userQueryReference = context.getServiceReference(UserQuery.class);
 		
-		handler = new BookingHandler();
-		// handler = new BookingHandler(dbms);
+		TSQuery tsquery = context.getService(TSQueryReference);
+		SessionQuery sessionquery = context.getService(sessionQueryReference);
+		CourseQuery coursequery = context.getService(courseQueryReference);
+		UserQuery userquery = context.getService(userQueryReference);
+		
+		handler = new BookingHandler(coursequery, sessionquery, tsquery, userquery);
 
 		bookingHandlerRegistration = context.registerService(Booker.class, handler, null);
 		
