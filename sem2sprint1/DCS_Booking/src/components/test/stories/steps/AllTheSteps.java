@@ -21,6 +21,7 @@ public class AllTheSteps {
 
   private User user;
   private Exception e = null;
+  private Boolean boolAnsw = false;
   
   private Session session;
   private TimetableSlot slot;
@@ -56,6 +57,7 @@ public class AllTheSteps {
   
 	
   //--------------------------------------------------------------
+  // 1st story
 	@Given("a user is a $utype")
 	public void userType(String utype) {
     if (utype.equals("admin"))
@@ -86,6 +88,7 @@ public class AllTheSteps {
   }
 
   //--------------------------------------------------------------
+  // creating sessions
 	@When("they create a new session")
 	public void createSession() {
 		this.session = new Session();
@@ -128,6 +131,7 @@ public class AllTheSteps {
 	}
 	
   //--------------------------------------------------------------
+  // addig time slots
 	@When("they create a new slot")
 	public void createSlot() {
 		this.slot = new TimetableSlot(null, 0, null);
@@ -173,6 +177,89 @@ public class AllTheSteps {
 		assertThat(1, equalTo(1));
 	}
 	
+  //--------------------------------------------------------------
+  // 12 story
+  @When("\"$course\" is compulsory")
+  public void courseIsCompulsory(String course) {
+    // TODO
+  }
+
+  @When("a user signed up for \"$course\"")
+  public void userSignedForCourse(String course) {
+    // TODO
+  }
+
+  @When("When he asks if he has signed up for all compulsory courses")
+  public void checkForSignedUp() {
+    // TODO
+  }
+
+  @Then("a \"$answer\" answer is given")
+  public void answerIsGiven(String answer) {
+    // TODO
+  }
+
+  //--------------------------------------------------------------
+  // nf_p0
+  @When("he asks to import $count random courses from MyCampus")
+  public void importNCourses(Integer count) {
+    // TODO
+  }
+
+  @Then("$count random courses exist in the database")
+  public void checkCoursesInDb(Integer count) {
+    // TODO
+  }
+
+  //--------------------------------------------------------------
+  // nf_p2
+  @Given("a database contains $count dummy users")
+  public void insertUsers(Integer count) {
+    // TODO
+  }
+
+  @When("they choose to login")
+  public void chooseLogin() {
+    // TODO
+  }
+
+  @When("they anter \"$username\" as a username")
+  public void enterUsername(String username) {
+    // TODO
+  }
+
+  @When("they enter \"$password\" as a password") 
+  public void enterPassword(Sring password) {
+    // TODO
+  }
+
+  @Then("a user is recognised as a $type") 
+  public void userRecognised(String type) {
+    // TODO
+  }
+
+  //--------------------------------------------------------------
+  // nf_p4
+  @When("$count random users login to the system")
+  public void usersLogin(Integer count) {
+    // TODO
+  }
+
+  @Then("a user nr $nr is recognised as a $type")
+  public void particularUserRecognised(Intger nr, String type) {
+    // TODO
+  }
+
+  //--------------------------------------------------------------
+  // nf_s0
+  @Then("a request to MyCampus is sent")
+  public void requestWentToMyCampus() {
+    // TODO
+  }
+
+  //--------------------------------------------------------------
+  // nf_s1 will pretty much work if the rest will work
+
   //--------------------------------------------------------------
   //--------------------------------------------------------------
 }
