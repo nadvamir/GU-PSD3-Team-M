@@ -240,7 +240,7 @@ public class AllTheSteps {
   }
 
   @When("they enter \"$password\" as a password") 
-  public void enterPassword(Sring password) {
+  public void enterPassword(String password) {
     // TODO
   }
 
@@ -257,7 +257,7 @@ public class AllTheSteps {
   }
 
   @Then("a user nr $nr is recognised as a $type")
-  public void particularUserRecognised(Intger nr, String type) {
+  public void particularUserRecognised(Integer nr, String type) {
     // TODO
   }
 

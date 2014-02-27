@@ -28,8 +28,8 @@ public class TSHandler implements TSAdd, TSQuery {
 	}
 	
 	@Override
-	public ArrayList<TimetableSlot> getTS(String sessionID) {
-		ArrayList<TimetableSlot> wanted = new ArrayList<TimetableSlot>();
+	public TimetableSlot getTS(String sessionID) {
+		TimetableSlot wanted = null;
 		ResultSet resultSet = null;
 		
 		try {
@@ -39,7 +39,7 @@ public class TSHandler implements TSAdd, TSQuery {
 			resultSet =	dbms.getRows(tableName, condition);
 			while (resultSet.next()) {
 				TimetableSlot currentTS = parseRow(resultSet);
-				wanted.add(currentTS);
+				wanted = currentTS;
 			}
 						
 		} catch (SQLException e) {
@@ -98,6 +98,34 @@ public class TSHandler implements TSAdd, TSQuery {
 		return r;
 	}
 	
+	@Override
+	public ArrayList<TimetableSlot> getTSBetween(Date start, Date end) {
+		ArrayList<TimetableSlot> wanted = new ArrayList<TimetableSlot>();
+		ResultSet resultSet = null;
+		
+		try {
+			//TODO proper date check?
+			String condition = "date>='"+start+"'";
+			
+			resultSet =	dbms.getRows(tableName, condition);
+			while (resultSet.next()) {
+				TimetableSlot currentTS = parseRow(resultSet);
+				wanted.add(currentTS);
+			}
+						
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally{
+			try{
+				resultSet.close();
+			} catch(SQLException e){
+				e.printStackTrace();
+			}
+		}
+		
+		
+		return wanted;
+	}
 
 	@Override
 	public void	addTS(TimetableSlot s, String sid){		
@@ -130,5 +158,4 @@ public class TSHandler implements TSAdd, TSQuery {
 			"PRIMARY KEY(name)";	
 		dbms.createTable(tableName, fields);
 	}
-	
 }
