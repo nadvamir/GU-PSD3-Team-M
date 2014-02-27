@@ -158,6 +158,31 @@ public class AllTheSteps {
   }
 
   //--------------------------------------------------------------
+  // nf_p2
+  @Given("a database contains $count dummy users")
+  public void insertUsers(Integer count) {
+    // TODO
+  }
+
+  @When("they choose to login")
+  public void chooseLogin() {
+    // TODO
+  }
+
+  @When("they anter \"$username\" as a username")
+  public void enterUsername(String username) {
+    // TODO
+  }
+
+  @When("they enter \"$password\" as a password") 
+  public void enterPassword(Sring password) {
+    // TODO
+  }
+
+  @Then("a user is recognised as a $type") 
+  public void userRecognised(String type) {
+    // TODO
+  }
   //--------------------------------------------------------------
   //--------------------------------------------------------------
   //--------------------------------------------------------------
