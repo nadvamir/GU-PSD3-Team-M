@@ -16,10 +16,7 @@ import java.util.Map;
 
 /**
  * Provides a simple wrapper around a (Derby) DBMS for
- * storing sensor readings.
- * 
- * @author tws
- * 
+ * storing DCS stuff
  */
 public class DBMS {
 	

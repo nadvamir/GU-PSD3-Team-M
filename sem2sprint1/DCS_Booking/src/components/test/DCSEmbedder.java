@@ -1,4 +1,4 @@
-package components.tests;
+package components.test;
 
 import java.net.URL;
 import java.text.SimpleDateFormat;
@@ -21,6 +21,7 @@ import org.jbehave.core.steps.ParameterConverters;
 import org.jbehave.core.steps.ParameterConverters.DateConverter;
 import org.jbehave.core.steps.SilentStepMonitor;
 import org.jbehave.core.steps.StepMonitor;
+
 
 public class DCSEmbedder extends Embedder {
  

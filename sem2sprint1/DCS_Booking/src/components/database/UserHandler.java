@@ -11,7 +11,7 @@ import java.util.Map;
  */
 public class UserHandler implements UserAdd, UserQuery {
 	
-	private String tableName = "user";
+	private final String tableName = "user";
 		
 	private DBMS dbms;
 	
@@ -52,7 +52,7 @@ public class UserHandler implements UserAdd, UserQuery {
 		
 	}
 
-	private User parseRow(ResultSet resultSet) throws SQLException {
+	public static User parseRow(ResultSet resultSet) throws SQLException {
 		
 		String name = resultSet.getString("name");
 		
