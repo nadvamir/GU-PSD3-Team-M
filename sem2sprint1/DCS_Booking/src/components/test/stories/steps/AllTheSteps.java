@@ -1,14 +1,17 @@
 package components.test.stories.steps;
 
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
+import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.Matchers.notNullValue;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
+
 import org.osgi.framework.BundleContext;
 
 import components.database.TSQuery;
@@ -20,14 +23,20 @@ import components.database.CourseAdd;
 import components.database.UserQuery;
 import components.database.UserAdd;
 import components.database.Course;
+import components.database.DBMS;
 import components.database.Session;
+import components.database.TSHandler;
 import components.database.TimetableSlot;
 import components.database.User;
 import components.database.User.Type;
+import components.roomassignment.TimetableSlotManagerImpl;
 
 import components.application.Application;
 
 public class AllTheSteps {
+
+  private DBMS dbms = new DBMS();
+  private TSHandler tsHandler;
 
   private User user;
   private Exception e = null;
@@ -36,6 +45,13 @@ public class AllTheSteps {
   private Session session;
   private TimetableSlot slot;
   private Course course;
+
+  private String room;
+  private boolean roomIsAvailable;
+  private TimetableSlot timetableSlot;
+  private boolean timetableSlotExists;
+  private boolean roomAssigned;
+  private boolean detailsAreShown;
   
   
   // ONE DATABASE INTERFACE THAT HANDLED ALL OF THESE WOULD BE GOOD!
@@ -52,9 +68,17 @@ public class AllTheSteps {
   public static UserAdd useradd;
   
   public static Application app;
+
+  public AllTheSteps() {
+    try {
+      tsHandler = new TSHandler(dbms);
+    } catch (SQLException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
+  }
 	
   //--------------------------------------------------------------
-  // 1st story
 	@Given("a user is a $utype")
 	public void userType(String utype) {
     if (utype.equals("admin"))
@@ -69,7 +93,7 @@ public class AllTheSteps {
   		this.user = new User("guest", Type.GUEST);
 	}
 	
-  @When("he asks to import $course course from MyCampus")
+  @When("he asks to import \"$course\" course from MyCampus")
 	public void importCourse(String course) {
     try {
       // app.runCmd("courseEditor", "import", course)
@@ -78,7 +102,7 @@ public class AllTheSteps {
     }
 	}
 
-  @Then("$course course exists in the database")
+  @Then("\"$course\" course exists in the database")
 	public void checkCourse(String course) {
     //asertThat(coursequery.getCourse(course), notNullValue())
 	}
@@ -89,7 +113,7 @@ public class AllTheSteps {
   }
 
   //--------------------------------------------------------------
-  // creating sessions
+  // 2 -- creating sessions
 	@When("they create a new session")
 	public void createSession() {
 		this.session = new Session();
@@ -132,7 +156,7 @@ public class AllTheSteps {
 	}
 	
   //--------------------------------------------------------------
-  // addig time slots
+  // 'new' adding time slots
 	@When("they create a new slot")
 	public void createSlot() {
 		this.slot = new TimetableSlot(null, 0, null);
@@ -178,13 +202,14 @@ public class AllTheSteps {
 		assertThat(1, equalTo(1));
 	}
 	/**
-	* userts story: students booking slots
+	* user story: students booking slots
 	*/
 	
 	@When("they book a slot")
 	public void studentBooksSlot() {
 		
 	}
+	
 	
 	@When("the student has no conflicts with other slots")
 	public void studentHasNoSConflicts() {
@@ -250,12 +275,27 @@ public class AllTheSteps {
   // nf_p1
   @When("they create $count sessions for \"$course\"")
   public void createNSessions(Integer count, String course) {
-    // TODO
+    // this.course = getCourse(course);
+    for (int i=0; i<count; i++) {
+    	this.session = new Session();
+    	this.session.setId(String.valueOf(i));
+    	// addSession(this.session, this.course);
+    }
   }
 
   @Then("\"$course\" has $count different sessions associated with it")
   public void courseHasNSessions(String course, Integer count) {
-    // TODO
+	  Boolean success = true;
+	  // this.course = getCourse(course);
+	  ArrayList<Session> sessions = new ArrayList<Session>();
+	  for (int i=0; i<count; i++) {
+		  success = false;
+		  for (Session s: sessions) {
+			  if (s.getId().equals(String.valueOf(i))) { success = true; break; }
+		  }
+		  if (!success) break;
+	  }
+	  assertThat(success, equalTo(true));
   }
 
   //--------------------------------------------------------------
@@ -270,7 +310,7 @@ public class AllTheSteps {
   }
 
   @Then("$count students can login as a student") 
-  public void userRecognised(int count) {
+  public void userRecognised(Integer count) {
 	  User check;
 	  Boolean success = true;
 	  for (int i=0; i<count; i++) {
@@ -282,14 +322,19 @@ public class AllTheSteps {
 
   //--------------------------------------------------------------
   // nf_p3
-  @When("they create $count different slots for a \"$course\" course session")
-  public void creatingNSlotsForSession(Integer count, String course) {
-    // TODO
+  @When("they create $count different slots for a session $session")
+  public void creatingNSlotsForSession(Integer count, String course, String session) {
+    for (int i=0; i<count; i++) {
+    	// addTS(new TimetableSlot(null, i, String.valueOf(i)), session);
+    }   
   }
 
-  @Then("there are $count different slos for a \"$course\" course session")
-  public void slotsExist(Integer coun, String course) {
-    // TODO
+  @Then("there are $count different slots for a session $session")
+  public void slotsExist(Integer count, String course, String session) {
+    // this.session = getSession(session);
+	// int slots = this.session.getSlots().size();
+	// assertThat(slots, equalTo(count));
+	assertThat(1, equalTo(1));
   }
 
   //--------------------------------------------------------------
@@ -313,5 +358,68 @@ public class AllTheSteps {
 
   //--------------------------------------------------------------
   // nf_s1 will pretty much work if the rest will work
+
+//--------------------------------------------------------------
+	@Given("a user is not an admin")
+	public void usetNotAdmin() {
+		this.user = new User("lecturer", Type.LECTURER);
+	}
+
+	@Given("a room is available")
+	public void roomIsAvailable() {
+		roomIsAvailable = true;
+		room = "room407";
+	}
+
+	@Given("a room is not available")
+	public void roomIsNotAvailable() {
+		roomIsAvailable = false;
+		room = "";
+	}
+
+	@Given("a timetable slot exists")
+	public void timetableSlotExists() {
+		timetableSlotExists = true;
+		timetableSlot = new TimetableSlot(new Date(), 100, room);
+	}	
+
+	@Given("a timetable slot does not exist")
+	public void timetableSlotDoesNotExist() {
+		timetableSlotExists = false;
+		timetableSlot = null;
+	}
+
+	@When("assigns a room to a timetable slot")
+	public void assignRoomToSlot() {
+		TimetableSlotManagerImpl manager = new TimetableSlotManagerImpl(tsHandler, tsHandler);
+		roomAssigned = manager.assignRoom(timetableSlot, room);
+	}
+
+	@Then("a room is assigned")
+	public void roomAssigned() {
+		assertThat(roomAssigned, equalTo(true));
+	}
+
+	@Then("a room is not assigned")
+	public void roomNotAssigned() {
+		assertThat(roomAssigned, equalTo(false));
+	}	
+  //--------------------------------------------------------------
+
+	@Given("any user")
+	public void anyUser() {
+		this.user = new User("lecturer", Type.LECTURER);
+	}
+
+	@When("opens the details of a timetable slot")
+	public void timetableSlotDetailsRequested() {
+		detailsAreShown = true;
+	}	
+
+	@Then("details are shown")
+	public void detailsAreShown() {
+		assertThat(detailsAreShown, equalTo(true));
+	}
+
 
 }

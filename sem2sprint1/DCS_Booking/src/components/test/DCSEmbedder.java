@@ -22,7 +22,7 @@ import org.jbehave.core.steps.ParameterConverters.DateConverter;
 import org.jbehave.core.steps.SilentStepMonitor;
 import org.jbehave.core.steps.StepMonitor;
 
-import components.test.stories.steps.DCSTest;
+import components.test.stories.steps.AllTheSteps;
 
 
 public class DCSEmbedder extends Embedder {
@@ -31,7 +31,7 @@ public class DCSEmbedder extends Embedder {
     public InjectableStepsFactory stepsFactory() {
         return
         	new InstanceStepsFactory(
-        		configuration(), new DCSTest());
+        		configuration(), new AllTheSteps());
     }
     
     //...
