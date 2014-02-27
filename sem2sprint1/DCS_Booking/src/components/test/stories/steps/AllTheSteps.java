@@ -373,6 +373,11 @@ public class AllTheSteps {
 
   //--------------------------------------------------------------
   // nf_s1 will pretty much work if the rest will work
+  @Then("a user is recognised as a $type")
+  public void userRecognised(String type) {
+    // TODO
+  }
+
 
 //--------------------------------------------------------------
 	@Given("a user is not an admin")
