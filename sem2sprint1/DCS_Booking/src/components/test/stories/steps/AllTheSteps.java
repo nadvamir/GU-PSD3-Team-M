@@ -67,6 +67,12 @@ public class AllTheSteps {
   public static UserQuery userquery;
   public static UserAdd useradd;
   
+  //for 4.
+  private User currentuser;
+  private Course currentcourse;
+  private ArrayList<Session> currentsessionarray;
+  private Session currentsession;
+  
   public static Application app;
 
   public AllTheSteps() {
@@ -156,6 +162,47 @@ public class AllTheSteps {
 	}
 	
   //--------------------------------------------------------------
+  // 4 -- 
+	@Given("a $userin who is lecturer")
+	public void userislecturer(String userin){
+		currentuser = new User(userin, Type.LECTURER);
+	}
+	
+	@When("course $coursename is selected")
+	public void courseisselected(String coursename){
+		currentcourse = new Course("1",coursename);
+		currentsessionarray = currentcourse.getSessions();
+	}
+	
+	@When("session from the course is selected")
+	public void sessionisselected(){
+		currentsession = new Session();
+		currentsessionarray.add(currentsession);
+	}
+	
+	@When("the $freq is selected")
+	public void freqisselected(String freq){
+		if(freq.equals("oneoff")){
+			currentsession.specifyoneoff();
+		}else if(freq.equals("weekly")){
+			currentsession.specifyweekly();
+		}else if(freq.equals("fortnightly")){
+			currentsession.specifyfortnightly();
+		}
+	}
+	
+	@Then("the session is $freq")
+	public void sessionis(String freq){
+		if(freq.equals("oneoff")){
+			assertThat(currentsession.getfreq(), equalTo(0));
+		}else if(freq.equals("weekly")){
+			assertThat(currentsession.getfreq(), equalTo(1));
+		}else if(freq.equals("fortnightly")){
+			assertThat(currentsession.getfreq(), equalTo(2));
+		}
+	}
+	
+  //---------------------------------------------------------	
   // 'new' adding time slots
 	@When("they create a new slot")
 	public void createSlot() {
