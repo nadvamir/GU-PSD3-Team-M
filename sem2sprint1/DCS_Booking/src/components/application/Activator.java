@@ -48,25 +48,25 @@ public class Activator implements BundleActivator {
             context.getServiceReference(Login.class);
         Login loginRH = context.getService(loginReference);
         try {
-			app.registerHandler(
-			    "login", new LoginHandler(loginRH, User.Type.GUEST)
-			);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} 
+          app.registerHandler(
+              "login", new LoginHandler(loginRH, User.Type.GUEST)
+          );
+        } catch (Exception e) {
+          // TODO Auto-generated catch block
+          e.printStackTrace();
+        } 
         
         ServiceReference<CourseManager> courseEditorReference =
                 context.getServiceReference(CourseManager.class);
         CourseManager courseEditorService = context.getService(courseEditorReference);
-		try {
-			app.registerHandler(
-				    "courseEditor", new CourseManagerHandler(courseEditorService, User.Type.GUEST)
-			);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+        try {
+          app.registerHandler(
+                "courseEditor", new CourseManagerHandler(courseEditorService, User.Type.GUEST)
+          );
+        } catch (Exception e) {
+          // TODO Auto-generated catch block
+          e.printStackTrace();
+        }
             
     }
 }

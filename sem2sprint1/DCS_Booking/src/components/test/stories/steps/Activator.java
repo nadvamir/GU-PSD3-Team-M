@@ -13,6 +13,7 @@ import components.database.TSAdd;
 import components.database.TSQuery;
 import components.database.UserAdd;
 import components.database.UserQuery;
+import components.application.Application;
 
 public class Activator implements BundleActivator {
 	
@@ -29,6 +30,8 @@ public class Activator implements BundleActivator {
 		ServiceReference<CourseAdd> courseAddReference = context.getServiceReference(CourseAdd.class);
 		ServiceReference<UserQuery> userQueryReference = context.getServiceReference(UserQuery.class);
 		ServiceReference<UserAdd> userAddReference = context.getServiceReference(UserAdd.class);
+
+		ServiceReference<Application> applicationReference = context.getServiceReference(Application.class);
 		
 		TSQuery tsquery = context.getService(TSQueryReference);
 		TSAdd tsadd = context.getService(TSAddReference);
@@ -38,11 +41,14 @@ public class Activator implements BundleActivator {
 		CourseAdd courseadd = context.getService(courseAddReference);
 		UserQuery userquery = context.getService(userQueryReference);
 		UserAdd useradd = context.getService(userAddReference);
+
+		Application app = context.getService(applicationReference);
 		
 		System.out.println("Setting up test service");
 
-    /*
     // a hack to get components inside of the test suite
+    // I guess the tests have to be run within OSGi
+    // which makes sense, since these are acceptence tests, not unit tests.
     AllTheSteps.context = context;
     AllTheSteps.tsquery = tsquery;
     AllTheSteps.tsadd = tsadd;
@@ -52,7 +58,8 @@ public class Activator implements BundleActivator {
     AllTheSteps.courseadd = courseadd;
     AllTheSteps.userquery = userquery;
     AllTheSteps.useradd = useradd;
-    */
+
+    AllTheSteps.app = app;
 		
 	}
 
