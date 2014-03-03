@@ -5,6 +5,7 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.notNullValue;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Date;
 
 import org.jbehave.core.annotations.Given;
