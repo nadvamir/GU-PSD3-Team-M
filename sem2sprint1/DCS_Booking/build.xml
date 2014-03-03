@@ -147,7 +147,7 @@
 			
 			<fileset 
 				dir="bin/"
-				includes="components/login/*.class"
+				includes="uk/ac/glasgow/psd3/components/login/*.class"
 			/>
 		
 		</jar>
@@ -156,7 +156,7 @@
 		
 			<fileset 
 				dir="bin/" 
-				includes="components/mcwrapper/*.class"
+				includes="uk/ac/glasgow/psd3/components/mcwrapper/*.class"
 			/>
 		
 		</jar>
@@ -165,7 +165,7 @@
 		
 			<fileset 
 				dir="bin/" 
-				includes="components/coursemanager/*.class"
+				includes="uk/ac/glasgow/psd3/components/coursemanager/*.class"
 			/>
 		
 		</jar>		
@@ -174,7 +174,7 @@
 		
 			<fileset 
 				dir="bin/" 
-				includes="components/application/*.class"
+				includes="uk/ac/glasgow/psd3/components/application/*.class"
 			/>
 		
 		</jar>
@@ -183,7 +183,7 @@
 		
 			<fileset 
 				dir="bin/" 
-				includes="components/booking/*.class"
+				includes="uk/ac/glasgow/psd3/components/booking/*.class"
 			/>
 		
 		</jar>		
@@ -192,7 +192,7 @@
 		
 			<fileset 
 				dir="bin/" 
-				includes="components/database/*.class"
+				includes="uk/ac/glasgow/psd3/components/database/*.class"
 			/>
 		
 		</jar>	
