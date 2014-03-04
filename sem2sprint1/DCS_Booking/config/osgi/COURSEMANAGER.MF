@@ -1,11 +1,11 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: DCS Booking System Course Manager
-Bundle-SymbolicName: uk.ac.glasgow.psd3.components.coursemanager
+Bundle-SymbolicName: uk.ac.glasgow.dcs_booking.components.coursemanager
 Bundle-Version: 1.0.0
-Bundle-Activator: uk.ac.glasgow.psd3.components.coursemanager.Activator
+Bundle-Activator: uk.ac.glasgow.dcs_booking.components.coursemanager.Activator
 Bundle-Vendor: University of Glasgow
 Bundle-Localization: plugin
 Import-Package: org.osgi.framework;version="1.3.0",
-  uk.ac.glasgow.psd3.components.mcwrapper
-Export-Package: uk.ac.glasgow.psd3.components.coursemanager
+  uk.ac.glasgow.dcs_booking.components.mcwrapper
+Export-Package: uk.ac.glasgow.dcs_booking.components.coursemanager
