@@ -214,6 +214,15 @@
 			/>
 		
 		</jar>
+		
+		<jar update="no" destfile="mcwrapper-impl.jar" manifest="config/osgi/MCWRAPPER-IMPL.MF">
+		
+			<fileset 
+				dir="bin/" 
+				includes="uk/ac/glasgow/dcs_booking/components/mcwrapper/impl/*.class"
+			/>
+		
+		</jar>
 
 		<jar update="no" destfile="studentcontrols.jar" manifest="config/osgi/STUDENTCONTROLS.MF">
 		

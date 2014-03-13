@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 3.0
+Bundle-Name: DCS. Implementation of wrapper to get MyCampus courses
+Bundle-SymbolicName: uk.ac.glasgow.dcs_booking.components.mcwrapper.impl
+Bundle-Version: 1.0.0
+Bundle-Activator: uk.ac.glasgow.dcs_booking.components.mcwrapper.impl.Activator
+Bundle-Vendor: University of Glasgow
+Bundle-Localization: plugin
+Import-Package: org.osgi.framework;version="1.3.0",
+  uk.ac.glasgow.dcs_booking.components.mcwrapper

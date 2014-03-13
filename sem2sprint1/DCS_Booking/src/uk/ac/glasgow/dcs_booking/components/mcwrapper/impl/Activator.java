@@ -1,9 +1,11 @@
-package uk.ac.glasgow.dcs_booking.components.mcwrapper;
+package uk.ac.glasgow.dcs_booking.components.mcwrapper.impl;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
 import org.osgi.framework.ServiceRegistration;
+
+import uk.ac.glasgow.dcs_booking.components.mcwrapper.MyCampusWrapper;
 
 public class Activator implements BundleActivator {
     private MyCampusController wrapper;

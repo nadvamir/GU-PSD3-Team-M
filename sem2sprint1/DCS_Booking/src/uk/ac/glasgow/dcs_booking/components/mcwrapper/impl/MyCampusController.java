@@ -1,6 +1,9 @@
-package uk.ac.glasgow.dcs_booking.components.mcwrapper;
+package uk.ac.glasgow.dcs_booking.components.mcwrapper.impl;
 
 import java.util.ArrayList;
+
+import uk.ac.glasgow.dcs_booking.components.mcwrapper.MyCampusCourse;
+import uk.ac.glasgow.dcs_booking.components.mcwrapper.MyCampusWrapper;
 
 public class MyCampusController implements MyCampusWrapper {
     /**
