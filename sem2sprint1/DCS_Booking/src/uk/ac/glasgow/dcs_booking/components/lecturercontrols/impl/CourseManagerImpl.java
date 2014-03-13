@@ -33,7 +33,7 @@ public class CourseManagerImpl implements CourseManager {
 	}
 
 	@Override
-	public boolean addCourse(Course course) {
+	public boolean importCourse(String id) {
 		// TODO Auto-generated method stub
 		return false;
 	}

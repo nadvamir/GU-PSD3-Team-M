@@ -14,8 +14,19 @@ import org.jbehave.core.annotations.When;
 
 import org.osgi.framework.BundleContext;
 
+// admin controls
 import uk.ac.glasgow.dcs_booking.components.admincontrols.impl.TimetableSlotManagerImpl;
+
+// lecturer controls
+import uk.ac.glasgow.dcs_booking.components.mcwrapper.impl.MyCampusController;
+import uk.ac.glasgow.dcs_booking.components.mcwrapper.MyCampusWrapper;
+import uk.ac.glasgow.dcs_booking.components.lecturercontrols.impl.CourseManagerImpl;
+import uk.ac.glasgow.dcs_booking.components.lecturercontrols.CourseManager;
+
+// application
 import uk.ac.glasgow.dcs_booking.components.application.Application;
+
+// database
 import uk.ac.glasgow.dcs_booking.components.database.Course;
 import uk.ac.glasgow.dcs_booking.components.database.CourseAdd;
 import uk.ac.glasgow.dcs_booking.components.database.CourseQuery;
@@ -54,6 +65,9 @@ public class AllTheSteps {
   private boolean roomAssigned;
   private boolean detailsAreShown;
   
+  // lecturer controls-specific variables
+	private MyCampusWrapper mcc = new MyCampusController();
+  private CourseManager cmng = new CourseManagerImpl(mcc);
   
   // ONE DATABASE INTERFACE THAT HANDLED ALL OF THESE WOULD BE GOOD!
   // YES, IT PROBABLY WOULD BE
@@ -103,7 +117,7 @@ public class AllTheSteps {
   @When("he asks to import \"$course\" course from MyCampus")
 	public void importCourse(String course) {
     try {
-      // app.runCmd("courseEditor", "import", course)
+      cmng.importCourse(course);
     } catch (Exception ex) {
       this.e = ex;
     }
@@ -111,12 +125,12 @@ public class AllTheSteps {
 
   @Then("\"$course\" course exists in the database")
 	public void checkCourse(String course) {
-    //asertThat(coursequery.getCourse(course), notNullValue())
+    assertThat(coursequery.getCourse(course), notNullValue());
 	}
 
   @Then("an exception is thrown")
   public void excepionThrown() {
-    // assertThat(e, notNullValue());
+    assertThat(e, notNullValue());
   }
 
   //--------------------------------------------------------------
