@@ -491,5 +491,19 @@ public class AllTheSteps {
 		assertThat(detailsAreShown, equalTo(true));
 	}
 
+  //--------------------------------------------------------------
+  @Given("there are $num clashes")
+  public void thereAreSomeClashes(Integer num) {
+    // injects some amount of clashed nonsense courses in the database
+  }
 
+  @When("they check for clashes")
+  public void checkForClashes() {
+    // call the checking api
+  }
+
+  @Then("they see $num clashes")
+  public void inspectClashResult(Integer num) {
+    // check the result of last action
+  }
 }
