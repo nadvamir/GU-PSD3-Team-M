@@ -1,15 +1,15 @@
-package uk.ac.glasgow.dcs_booking.components.booking.impl;
+package uk.ac.glasgow.dcs_booking.components.studentcontrols.impl;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
 import org.osgi.framework.ServiceRegistration;
 
-import uk.ac.glasgow.dcs_booking.components.booking.Booker;
 import uk.ac.glasgow.dcs_booking.components.database.CourseQuery;
 import uk.ac.glasgow.dcs_booking.components.database.SessionQuery;
 import uk.ac.glasgow.dcs_booking.components.database.TSQuery;
 import uk.ac.glasgow.dcs_booking.components.database.UserQuery;
+import uk.ac.glasgow.dcs_booking.components.studentcontrols.Booker;
 
 
 public class Activator implements BundleActivator {

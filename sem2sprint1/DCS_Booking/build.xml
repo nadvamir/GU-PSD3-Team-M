@@ -179,20 +179,20 @@
 		
 		</jar>
 
-		<jar update="no" destfile="booking.jar" manifest="config/osgi/BOOKING.MF">
+		<jar update="no" destfile="studentcontrols.jar" manifest="config/osgi/STUDENTCONTROLS.MF">
 		
 			<fileset 
 				dir="bin/" 
-				includes="uk/ac/glasgow/dcs_booking/components/booking/*.class"
+				includes="uk/ac/glasgow/dcs_booking/components/studentcontrols/*.class"
 			/>
 		
 		</jar>		
 		
-		<jar update="no" destfile="booking-impl.jar" manifest="config/osgi/BOOKING-IMPL.MF">
+		<jar update="no" destfile="studentcontrols-impl.jar" manifest="config/osgi/STUDENTCONTROLS-IMPL.MF">
 		
 			<fileset 
 				dir="bin/" 
-				includes="uk/ac/glasgow/dcs_booking/components/booking/impl/*.class"
+				includes="uk/ac/glasgow/dcs_booking/components/studentcontrols/impl/*.class"
 			/>
 		
 		</jar>	
