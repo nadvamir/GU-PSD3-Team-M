@@ -103,7 +103,7 @@ public class SessionHandler implements SessionAdd, SessionQuery {
 				"id VARCHAR(100) NOT NULL," +
 						"cid VARCHAR(100) NOT NULL," +
 						"compulsory CHAR(1) NOT NULL," +
-						"PRIMARY KEY(name)";	
+						"PRIMARY KEY(id,cid)";	
 		dbms.createTable(tableName, fields);
 	}
 

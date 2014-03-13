@@ -138,7 +138,7 @@ public class TSHandler implements TSAdd, TSQuery {
 			"capacity INT," +
 			"room VARCHAR(100)," +
 			"tutor VARCHAR(100)," +
-			"PRIMARY KEY(name)";	
+			"PRIMARY KEY(sid,date)";	
 		dbms.createTable(tableName, fields);
 	}
 }
