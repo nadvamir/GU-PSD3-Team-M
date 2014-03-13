@@ -12,7 +12,7 @@ public interface CourseManager {
 
 	public List<Course> getAllCourses();
 	public Course getCourse(String id);
-	public boolean addCourse(Course course);
+	public boolean importCourse(String id);
 	public boolean removeCourse(String id);
 	public boolean updateCourseTitle(String id, String title);
 	public boolean updateCourseSessions(String id, ArrayList<Session> sessions);

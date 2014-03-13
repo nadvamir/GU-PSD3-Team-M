@@ -27,25 +27,45 @@ public class BookingHandler implements Booker {
 		this.tsquery = tsquery;
 		this.userquery = userquery;
 	}
-
-	@Override
-	public boolean slotIsFull(TimetableSlot ts) {
-		if (ts.getStudents().size() == ts.getCapacity()) return true;
-		else return false;
+	
+	//  My own helper function, simplifying future functions that rely on obtaining a specific timetable slot
+	private TimetableSlot getSlot(String sid, String room, Date date) {
+		ArrayList<TimetableSlot> slots = tsquery.getTS(sid);
+		for (TimetableSlot slot : slots) {
+			if (slot.getDate().equals(date) && slot.getRoom().equalsIgnoreCase(room)) {
+				return slot;
+			}
+		}
+		// Slot doesn't exist
+		return null;
 	}
 
 	@Override
-	public boolean book(User s, TimetableSlot ts) {
-		// Slot is full, can't book
-		if (slotIsFull(ts)) return false;
-		
+	public boolean slotIsFull(String sid, String room, Date date) {
+		TimetableSlot slot = getSlot(sid, room, date);
+		if (slotIsFull(slot)) return true;
+		else return false;
+	}
+	
+	// My own helper function, simplifying future functions that rely on knowing if a timetable slot is full
+	private boolean slotIsFull(TimetableSlot ts) {
+		return (ts.getStudents().size()==ts.getCapacity());
+	}
+
+	@Override
+	public boolean book(User s, String sid, String room, Date date) {
+		TimetableSlot slot = getSlot(sid, room, date);
+		if (slot == null || slotIsFull(slot)) return false;
 		else {
 			// Add new student to timetable slot
-			ts.getStudents().add(s);
+			slot.getStudents().add(s);
 			return true;
 		}
 	}
-
+	
+	// Cannot properly implement with current Database interface
+	// Need a method to return all courses
+	// (perhaps based on level/degree to make more useful)
 	@Override
 	public Course[] getCourses() {
 		// TODO Auto-generated method stub
@@ -80,9 +100,8 @@ public class BookingHandler implements Booker {
 	}
 	
 	@Override
-	public String getInfo(TimetableSlot ts) {
-		Date date = ts.getDate();
-		String location = ts.getRoom();
+	public String getInfo(String sid, String room, Date date) {
+		TimetableSlot ts = getSlot(sid, room, date);
 		ArrayList<User> students = ts.getStudents();
 		User tutor = ts.getTutor();
 		
@@ -91,8 +110,8 @@ public class BookingHandler implements Booker {
 		else report += "   "+date+"\n";
 		
 		report += "---LOCATION---\n";
-		if (location == null) report += "   Not known\n";
-		else report += "   "+location+"\n";
+		if (room == null) report += "   Not known\n";
+		else report += "   "+room+"\n";
 		
 		report += "---STUDENTS---\n";
 		if (students == null) report += "  Not known\n";
