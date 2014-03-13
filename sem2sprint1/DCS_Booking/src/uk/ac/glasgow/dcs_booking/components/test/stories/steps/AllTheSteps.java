@@ -491,7 +491,7 @@ public class AllTheSteps {
   @When("they check for clashes")
   public void checkForClashes() {
     // call the checking api
-    this.resLen = tsm.checkClashesForLevel(1).size();
+    this.resLen = tsmng.checkClashesForLevel(1).size();
   }
 
   @Then("they see $num clashes")
