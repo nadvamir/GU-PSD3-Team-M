@@ -65,7 +65,6 @@ public class AllTheSteps {
   private TimetableSlot timetableSlot;
   private boolean timetableSlotExists;
   private boolean roomAssigned;
-  private boolean detailsAreShown;
   
   // ONE DATABASE INTERFACE THAT HANDLED ALL OF THESE WOULD BE GOOD!
   // YES, IT PROBABLY WOULD BE
@@ -445,23 +444,6 @@ public class AllTheSteps {
   public void userRecognised(String type) {
     // TODO
   }
-
-  //--------------------------------------------------------------
-
-	@Given("any user")
-	public void anyUser() {
-		this.user = new User("lecturer", Type.LECTURER);
-	}
-
-	@When("opens the details of a timetable slot")
-	public void timetableSlotDetailsRequested() {
-		detailsAreShown = true;
-	}	
-
-	@Then("details are shown")
-	public void detailsAreShown() {
-		assertThat(detailsAreShown, equalTo(true));
-	}
 
   //--------------------------------------------------------------
   // additional test case

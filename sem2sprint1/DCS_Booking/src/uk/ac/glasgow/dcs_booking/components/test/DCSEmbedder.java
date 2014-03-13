@@ -24,6 +24,7 @@ import org.jbehave.core.steps.SilentStepMonitor;
 import org.jbehave.core.steps.StepMonitor;
 
 import uk.ac.glasgow.dcs_booking.components.test.stories.steps.AllTheSteps;
+import uk.ac.glasgow.dcs_booking.components.test.stories.steps.Story_14;
 import uk.ac.glasgow.dcs_booking.components.test.stories.steps.Story_8;
 
 
@@ -35,6 +36,7 @@ public class DCSEmbedder extends Embedder {
     	ArrayList list = new ArrayList();
     	list.add(new AllTheSteps());
     	list.add(new Story_8());
+    	list.add(new Story_14());
     	
         return
         	new InstanceStepsFactory(

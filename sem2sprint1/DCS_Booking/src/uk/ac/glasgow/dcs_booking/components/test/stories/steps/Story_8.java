@@ -39,9 +39,9 @@ public class Story_8 {
       e.printStackTrace();
     }
   }
-	
+
 	@Given("a user is an admin")
-	public void userIsAdmin(String utype) {
+	public void userIsAdmin() {
   		this.user = new User("admin", Type.ADMIN);
 	}
 
