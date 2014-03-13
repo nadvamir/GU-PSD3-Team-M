@@ -1,7 +1,8 @@
-package uk.ac.glasgow.dcs_booking.components.login;
+package uk.ac.glasgow.dcs_booking.components.login.impl;
 
 import uk.ac.glasgow.dcs_booking.components.database.User;
 import uk.ac.glasgow.dcs_booking.components.database.User.Type;
+import uk.ac.glasgow.dcs_booking.components.login.Login;
 
 public class Authenticator implements Login {
 

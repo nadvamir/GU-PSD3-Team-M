@@ -1,9 +1,11 @@
-package uk.ac.glasgow.dcs_booking.components.login;
+package uk.ac.glasgow.dcs_booking.components.login.impl;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
 import org.osgi.framework.ServiceRegistration;
+
+import uk.ac.glasgow.dcs_booking.components.login.Login;
 
 public class Activator implements BundleActivator{
 	

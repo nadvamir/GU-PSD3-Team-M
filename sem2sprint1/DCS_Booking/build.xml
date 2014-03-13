@@ -205,6 +205,15 @@
 			/>
 		
 		</jar>
+		
+		<jar update="no" destfile="login-impl.jar" manifest="config/osgi/LOGIN-IMPL.MF">
+			
+			<fileset 
+				dir="bin/"
+				includes="uk/ac/glasgow/dcs_booking/components/login/impl/*.class"
+			/>
+		
+		</jar>
 
 		<jar update="no" destfile="mcwrapper.jar" manifest="config/osgi/MCWRAPPER.MF">
 		
