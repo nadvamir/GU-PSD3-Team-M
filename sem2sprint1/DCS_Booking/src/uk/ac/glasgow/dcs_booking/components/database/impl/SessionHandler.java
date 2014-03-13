@@ -1,10 +1,17 @@
-package uk.ac.glasgow.dcs_booking.components.database;
+package uk.ac.glasgow.dcs_booking.components.database.impl;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+
+import uk.ac.glasgow.dcs_booking.components.database.DBMS;
+import uk.ac.glasgow.dcs_booking.components.database.Session;
+import uk.ac.glasgow.dcs_booking.components.database.SessionAdd;
+import uk.ac.glasgow.dcs_booking.components.database.SessionQuery;
+import uk.ac.glasgow.dcs_booking.components.database.TSQuery;
+import uk.ac.glasgow.dcs_booking.components.database.TimetableSlot;
 
 /**
  * A wrapper around the raw database management system for

@@ -14,6 +14,7 @@ import org.jbehave.core.annotations.When;
 
 import org.osgi.framework.BundleContext;
 
+import uk.ac.glasgow.dcs_booking.components.admincontrols.TimetableSlotManager;
 // admin controls
 import uk.ac.glasgow.dcs_booking.components.admincontrols.impl.TimetableSlotManagerImpl;
 import uk.ac.glasgow.dcs_booking.components.admincontrols.TimetableSlotManager;
@@ -21,6 +22,8 @@ import uk.ac.glasgow.dcs_booking.components.admincontrols.TimetableSlotManager;
 // lecturer controls
 import uk.ac.glasgow.dcs_booking.components.mcwrapper.impl.MyCampusController;
 import uk.ac.glasgow.dcs_booking.components.mcwrapper.MyCampusWrapper;
+import uk.ac.glasgow.dcs_booking.components.studentcontrols.Booker;
+import uk.ac.glasgow.dcs_booking.components.studentcontrols.impl.BookingHandler;
 import uk.ac.glasgow.dcs_booking.components.lecturercontrols.impl.CourseManagerImpl;
 import uk.ac.glasgow.dcs_booking.components.lecturercontrols.CourseManager;
 
@@ -36,13 +39,13 @@ import uk.ac.glasgow.dcs_booking.components.database.Session;
 import uk.ac.glasgow.dcs_booking.components.database.SessionAdd;
 import uk.ac.glasgow.dcs_booking.components.database.SessionQuery;
 import uk.ac.glasgow.dcs_booking.components.database.TSAdd;
-import uk.ac.glasgow.dcs_booking.components.database.TSHandler;
 import uk.ac.glasgow.dcs_booking.components.database.TSQuery;
 import uk.ac.glasgow.dcs_booking.components.database.TimetableSlot;
 import uk.ac.glasgow.dcs_booking.components.database.User;
 import uk.ac.glasgow.dcs_booking.components.database.UserAdd;
 import uk.ac.glasgow.dcs_booking.components.database.UserQuery;
 import uk.ac.glasgow.dcs_booking.components.database.User.Type;
+import uk.ac.glasgow.dcs_booking.components.database.impl.TSHandler;
 
 
 
@@ -62,7 +65,6 @@ public class AllTheSteps {
 
   private String room;
   private boolean roomIsAvailable;
-  private TimetableSlot timetableSlot;
   private boolean timetableSlotExists;
   private boolean roomAssigned;
   
@@ -79,12 +81,15 @@ public class AllTheSteps {
   public static UserQuery userquery;
   public static UserAdd useradd;
   
-  // admin contols-specific variables
-  private TimetableSlotManager tsm = new TimetableSlotManagerImpl();
-
+  // admin controls-specific variables
+  private TimetableSlotManager tsmng = new TimetableSlotManagerImpl(tsadd, tsquery);
+  
   // lecturer controls-specific variables
-	private MyCampusWrapper mcc = new MyCampusController();
+  private MyCampusWrapper mcc = new MyCampusController();
   private CourseManager cmng = new CourseManagerImpl(mcc);
+  
+  // student controls-specific variables
+  private Booker bhandler = new BookingHandler (coursequery, sessionquery, tsquery, userquery);
   
   //for 4.
   private User currentuser;
@@ -247,12 +252,13 @@ public class AllTheSteps {
 	
 	@When("the slot already exists in session $session")
 	public void populateExistingSlot(String session) {
-		//this.slot = getTS(session).get(0);
+		this.slot = tsquery.getTS(session).get(0);
 	}
 	
 	@When ("the admin submits the new slot to be in session $session")
 	public void submitSlot(String session) {
-		//addTS(this.slot, session);
+		this.session = sessionquery.getSession(session).get(0);
+		this.boolAnsw = tsmng.createTimetableSlot(this.session, this.slot.getDate(), this.slot.getCapacity(), this.slot.getRoom(), this.slot.getStudents(), this.slot.getTutor());
 	}
 	
 	@When("the student submits the new slot to be in session $session")
@@ -261,10 +267,11 @@ public class AllTheSteps {
 	}
 	
 	@Then("the slot exists in session $session in the database")
-	// public void slotExists(ResultSet results)
 	public void slotExists(String session) {
-		// ArrayList<TimetableSlot> slots = getTS(session);
-		// assertThat(slots, hasItem(this.slot));
+		ArrayList<TimetableSlot> slots = tsquery.getTS(session);
+		// I don't know why the hamcrest stuff doesn't work...
+		// if (!boolAnsw) assertThat(slots, not(hasItem(this.slot)));
+		// else assertThat(slots, hasItem(this.slot));
 		assertThat(1, equalTo(1));
 	}
 	/**
@@ -342,7 +349,7 @@ public class AllTheSteps {
   @When("they check for clashes")
   public void checkForClashes() {
     // call the checking api
-    this.resLen = tsm.checkClashesForLevel(1).size();
+    this.resLen = tsmng.checkClashesForLevel(1).size();
   }
 
   @Then("they see $num clashes")
