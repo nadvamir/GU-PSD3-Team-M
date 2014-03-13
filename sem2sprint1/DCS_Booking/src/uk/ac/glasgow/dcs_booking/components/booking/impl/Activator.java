@@ -1,10 +1,11 @@
-package uk.ac.glasgow.dcs_booking.components.booking;
+package uk.ac.glasgow.dcs_booking.components.booking.impl;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
 import org.osgi.framework.ServiceRegistration;
 
+import uk.ac.glasgow.dcs_booking.components.booking.Booker;
 import uk.ac.glasgow.dcs_booking.components.database.CourseQuery;
 import uk.ac.glasgow.dcs_booking.components.database.SessionQuery;
 import uk.ac.glasgow.dcs_booking.components.database.TSQuery;

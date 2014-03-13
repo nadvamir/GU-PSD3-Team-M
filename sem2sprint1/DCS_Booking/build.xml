@@ -187,6 +187,15 @@
 			/>
 		
 		</jar>		
+		
+		<jar update="no" destfile="booking-impl.jar" manifest="config/osgi/BOOKING-IMPL.MF">
+		
+			<fileset 
+				dir="bin/" 
+				includes="uk/ac/glasgow/dcs_booking/components/booking/impl/*.class"
+			/>
+		
+		</jar>	
 
 		<jar update="no" destfile="database.jar" manifest="config/osgi/DATABASE.MF">
 		
