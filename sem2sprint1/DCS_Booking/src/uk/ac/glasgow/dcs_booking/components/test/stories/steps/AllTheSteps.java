@@ -39,13 +39,13 @@ import uk.ac.glasgow.dcs_booking.components.database.Session;
 import uk.ac.glasgow.dcs_booking.components.database.SessionAdd;
 import uk.ac.glasgow.dcs_booking.components.database.SessionQuery;
 import uk.ac.glasgow.dcs_booking.components.database.TSAdd;
-import uk.ac.glasgow.dcs_booking.components.database.TSHandler;
 import uk.ac.glasgow.dcs_booking.components.database.TSQuery;
 import uk.ac.glasgow.dcs_booking.components.database.TimetableSlot;
 import uk.ac.glasgow.dcs_booking.components.database.User;
 import uk.ac.glasgow.dcs_booking.components.database.UserAdd;
 import uk.ac.glasgow.dcs_booking.components.database.UserQuery;
 import uk.ac.glasgow.dcs_booking.components.database.User.Type;
+import uk.ac.glasgow.dcs_booking.components.database.impl.TSHandler;
 
 
 
@@ -491,7 +491,7 @@ public class AllTheSteps {
   @When("they check for clashes")
   public void checkForClashes() {
     // call the checking api
-    this.resLen = tsm.checkClashesForLevel(1).size();
+    this.resLen = tsmng.checkClashesForLevel(1).size();
   }
 
   @Then("they see $num clashes")

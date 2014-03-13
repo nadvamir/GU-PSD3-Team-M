@@ -1,4 +1,4 @@
-package uk.ac.glasgow.dcs_booking.components.database;
+package uk.ac.glasgow.dcs_booking.components.database.impl;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -8,6 +8,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.osgi.framework.ServiceReference;
+
+import uk.ac.glasgow.dcs_booking.components.database.DBMS;
+import uk.ac.glasgow.dcs_booking.components.database.TSAdd;
+import uk.ac.glasgow.dcs_booking.components.database.TSQuery;
+import uk.ac.glasgow.dcs_booking.components.database.TimetableSlot;
+import uk.ac.glasgow.dcs_booking.components.database.User;
+import uk.ac.glasgow.dcs_booking.components.database.UserQuery;
 
 /**
  * A wrapper around the raw database management system for

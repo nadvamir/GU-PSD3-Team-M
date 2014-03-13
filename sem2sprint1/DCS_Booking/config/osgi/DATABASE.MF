@@ -1,9 +1,8 @@
 Manifest-Version: 1.0
-Bundle-ManifestVersion: 2
-Bundle-Name: DCS Booking Database
+Bundle-ManifestVersion: 3.0
+Bundle-Name: DCS Booking Database Specification
 Bundle-SymbolicName: uk.ac.glasgow.dcs_booking.components.database
 Bundle-Version: 1.0.0
-Bundle-Activator: uk.ac.glasgow.dcs_booking.components.database.Activator
 Bundle-Vendor: University of Glasgow
 Bundle-Localization: plugin
 Import-Package: org.osgi.framework;version="1.3.0"
