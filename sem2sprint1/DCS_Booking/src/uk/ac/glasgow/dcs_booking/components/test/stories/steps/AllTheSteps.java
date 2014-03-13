@@ -14,6 +14,7 @@ import org.jbehave.core.annotations.When;
 
 import org.osgi.framework.BundleContext;
 
+import uk.ac.glasgow.dcs_booking.components.admincontrols.impl.TimetableSlotManagerImpl;
 import uk.ac.glasgow.dcs_booking.components.application.Application;
 import uk.ac.glasgow.dcs_booking.components.database.Course;
 import uk.ac.glasgow.dcs_booking.components.database.CourseAdd;
@@ -30,7 +31,6 @@ import uk.ac.glasgow.dcs_booking.components.database.User;
 import uk.ac.glasgow.dcs_booking.components.database.UserAdd;
 import uk.ac.glasgow.dcs_booking.components.database.UserQuery;
 import uk.ac.glasgow.dcs_booking.components.database.User.Type;
-import uk.ac.glasgow.dcs_booking.components.roomassignment.TimetableSlotManagerImpl;
 
 
 

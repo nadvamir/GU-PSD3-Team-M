@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 3
-Bundle-Name: DCS Booking System Course Manager
+Bundle-Name: DCS Booking System Lecturer Controls Specification
 Bundle-SymbolicName: uk.ac.glasgow.dcs_booking.components.lecturercontrols
 Bundle-Version: 1.0.0
 Bundle-Vendor: University of Glasgow

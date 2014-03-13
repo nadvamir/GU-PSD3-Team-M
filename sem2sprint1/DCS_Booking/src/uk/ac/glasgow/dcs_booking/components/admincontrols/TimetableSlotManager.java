@@ -1,4 +1,4 @@
-package uk.ac.glasgow.dcs_booking.components.roomassignment;
+package uk.ac.glasgow.dcs_booking.components.admincontrols;
 
 import java.util.ArrayList;
 import java.util.Date;

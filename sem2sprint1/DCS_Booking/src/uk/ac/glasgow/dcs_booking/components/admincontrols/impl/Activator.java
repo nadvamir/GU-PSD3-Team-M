@@ -1,8 +1,10 @@
-package uk.ac.glasgow.dcs_booking.components.roomassignment;
+package uk.ac.glasgow.dcs_booking.components.admincontrols.impl;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceRegistration;
+
+import uk.ac.glasgow.dcs_booking.components.admincontrols.TimetableSlotManager;
 
 public class Activator implements BundleActivator {
 

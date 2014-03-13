@@ -142,21 +142,39 @@
 		description="Builds OSGi bundles for the project."
 		depends="compile"
 	>
-
-		<jar update="no" destfile="login.jar" manifest="config/osgi/LOGIN.MF">
-			
+	
+		<jar update="no" destfile="admincontrols.jar" manifest="config/osgi/ADMINCONTROLS.MF">
+		
 			<fileset 
-				dir="bin/"
-				includes="uk/ac/glasgow/dcs_booking/components/login/*.class"
+				dir="bin/" 
+				includes="uk/ac/glasgow/dcs_booking/admincontrols/*.class"
+			/>
+		
+		</jar>
+		
+		<jar update="no" destfile="admincontrols-impl.jar" manifest="config/osgi/ADMINCONTROLS-IMPL.MF">
+		
+			<fileset 
+				dir="bin/" 
+				includes="uk/ac/glasgow/dcs_booking/admincontrols/impl/*.class"
+			/>
+		
+		</jar>
+		
+		<jar update="no" destfile="application.jar" manifest="config/osgi/APPLICATION.MF">
+		
+			<fileset 
+				dir="bin/" 
+				includes="uk/ac/glasgow/dcs_booking/components/application/*.class"
 			/>
 		
 		</jar>
 
-		<jar update="no" destfile="mcwrapper.jar" manifest="config/osgi/MCWRAPPER.MF">
+		<jar update="no" destfile="database.jar" manifest="config/osgi/DATABASE.MF">
 		
 			<fileset 
 				dir="bin/" 
-				includes="uk/ac/glasgow/dcs_booking/components/mcwrapper/*.class"
+				includes="uk/ac/glasgow/dcs_booking/components/database/*.class"
 			/>
 		
 		</jar>
@@ -179,11 +197,20 @@
 		
 		</jar>	
 
-		<jar update="no" destfile="application.jar" manifest="config/osgi/APPLICATION.MF">
+		<jar update="no" destfile="login.jar" manifest="config/osgi/LOGIN.MF">
+			
+			<fileset 
+				dir="bin/"
+				includes="uk/ac/glasgow/dcs_booking/components/login/*.class"
+			/>
+		
+		</jar>
+
+		<jar update="no" destfile="mcwrapper.jar" manifest="config/osgi/MCWRAPPER.MF">
 		
 			<fileset 
 				dir="bin/" 
-				includes="uk/ac/glasgow/dcs_booking/components/application/*.class"
+				includes="uk/ac/glasgow/dcs_booking/components/mcwrapper/*.class"
 			/>
 		
 		</jar>
@@ -204,25 +231,7 @@
 				includes="uk/ac/glasgow/dcs_booking/components/studentcontrols/impl/*.class"
 			/>
 		
-		</jar>	
-
-		<jar update="no" destfile="database.jar" manifest="config/osgi/DATABASE.MF">
-		
-			<fileset 
-				dir="bin/" 
-				includes="uk/ac/glasgow/dcs_booking/components/database/*.class"
-			/>
-		
-		</jar>	
-		
-		<jar update="no" destfile="roomassignment.jar" manifest="config/osgi/ROOMASSIGNMENT.MF">
-		
-			<fileset 
-				dir="bin/" 
-				includes="uk/ac/glasgow/dcs_booking/roomassignment/*.class"
-			/>
-		
-		</jar>
+		</jar>		
 
 	</target>
 	

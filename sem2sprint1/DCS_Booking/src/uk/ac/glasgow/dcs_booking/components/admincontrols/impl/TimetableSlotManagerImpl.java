@@ -1,8 +1,9 @@
-package uk.ac.glasgow.dcs_booking.components.roomassignment;
+package uk.ac.glasgow.dcs_booking.components.admincontrols.impl;
 
 import java.util.ArrayList;
 import java.util.Date;
 
+import uk.ac.glasgow.dcs_booking.components.admincontrols.TimetableSlotManager;
 import uk.ac.glasgow.dcs_booking.components.database.Session;
 import uk.ac.glasgow.dcs_booking.components.database.TSAdd;
 import uk.ac.glasgow.dcs_booking.components.database.TSQuery;
