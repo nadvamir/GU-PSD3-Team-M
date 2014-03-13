@@ -11,7 +11,7 @@ import java.util.Map;
  */
 public class UserHandler implements UserAdd, UserQuery {
 	
-	private final String tableName = "user";
+	private final String tableName = "USERT";
 		
 	private DBMS dbms;
 	
