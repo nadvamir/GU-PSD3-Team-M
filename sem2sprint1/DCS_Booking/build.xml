@@ -128,7 +128,7 @@
 		description="Runs jbehave tests"
 	>
 		
-		<junit>
+		<junit printsummary="yes" showoutput="true">
 			
             <test name="uk.ac.glasgow.dcs_booking.components.test.DCSStories"/>
 			<classpath refid="project.classpath"/>

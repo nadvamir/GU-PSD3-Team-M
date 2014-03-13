@@ -2,6 +2,7 @@ package uk.ac.glasgow.dcs_booking.components.test;
 
 import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 
 import org.jbehave.core.configuration.Configuration;
 import org.jbehave.core.configuration.MostUsefulConfiguration;
@@ -23,6 +24,7 @@ import org.jbehave.core.steps.SilentStepMonitor;
 import org.jbehave.core.steps.StepMonitor;
 
 import uk.ac.glasgow.dcs_booking.components.test.stories.steps.AllTheSteps;
+import uk.ac.glasgow.dcs_booking.components.test.stories.steps.Story_8;
 
 
 
@@ -30,9 +32,13 @@ public class DCSEmbedder extends Embedder {
  
     @Override
     public InjectableStepsFactory stepsFactory() {
+    	ArrayList list = new ArrayList();
+    	list.add(new AllTheSteps());
+    	list.add(new Story_8());
+    	
         return
         	new InstanceStepsFactory(
-        		configuration(), new AllTheSteps());
+        		configuration(), list);
     }
     
     //...
