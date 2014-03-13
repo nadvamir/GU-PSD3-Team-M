@@ -1,8 +1,9 @@
-package uk.ac.glasgow.dcs_booking.components.booking;
+package uk.ac.glasgow.dcs_booking.components.booking.impl;
 
 import java.util.ArrayList;
 import java.util.Date;
 
+import uk.ac.glasgow.dcs_booking.components.booking.Booker;
 import uk.ac.glasgow.dcs_booking.components.database.Course;
 import uk.ac.glasgow.dcs_booking.components.database.CourseQuery;
 import uk.ac.glasgow.dcs_booking.components.database.Session;
