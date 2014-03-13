@@ -15,9 +15,6 @@ public class CourseManagerImpl implements CourseManager {
 	
 	public CourseManagerImpl(MyCampusWrapper myCampusController) {
 		this.myCampusController = myCampusController;
-		
-		
-		System.out.println(getAllMyCampusCourses());
 	}
 
 	@Override
