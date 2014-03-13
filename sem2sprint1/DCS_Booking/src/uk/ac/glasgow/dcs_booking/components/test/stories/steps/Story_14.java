@@ -22,6 +22,7 @@ public class Story_14 {
 
 	@When("opens the details of a timetable slot")
 	public void timetableSlotDetailsRequested() {
+		//detailsAreReturned = getDetails(params) - the method that looks something like this should be implemented		
 		detailsAreShown = true;
 	}	
 

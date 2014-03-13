@@ -26,6 +26,12 @@ import org.jbehave.core.steps.StepMonitor;
 import uk.ac.glasgow.dcs_booking.components.test.stories.steps.AllTheSteps;
 import uk.ac.glasgow.dcs_booking.components.test.stories.steps.Story_14;
 import uk.ac.glasgow.dcs_booking.components.test.stories.steps.Story_8;
+import uk.ac.glasgow.dcs_booking.components.test.stories.steps.Story_NF_p0;
+import uk.ac.glasgow.dcs_booking.components.test.stories.steps.Story_NF_p1;
+import uk.ac.glasgow.dcs_booking.components.test.stories.steps.Story_NF_p2;
+import uk.ac.glasgow.dcs_booking.components.test.stories.steps.Story_NF_p3;
+import uk.ac.glasgow.dcs_booking.components.test.stories.steps.Story_NF_p4;
+import uk.ac.glasgow.dcs_booking.components.test.stories.steps.Story_NF_s0;
 
 
 
@@ -37,6 +43,12 @@ public class DCSEmbedder extends Embedder {
     	list.add(new AllTheSteps());
     	list.add(new Story_8());
     	list.add(new Story_14());
+    	list.add(new Story_NF_p0());
+    	list.add(new Story_NF_p1());
+    	list.add(new Story_NF_p2());
+    	list.add(new Story_NF_p3());
+    	list.add(new Story_NF_p4());
+    	list.add(new Story_NF_s0());
     	
         return
         	new InstanceStepsFactory(
