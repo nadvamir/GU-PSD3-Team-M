@@ -76,14 +76,14 @@ public class AllTheSteps {
   
   public static Application app;
 
-//  public AllTheSteps() {
-//    try {
-//      tsHandler = new TSHandler(dbms);
-//    } catch (SQLException e) {
-//      // TODO Auto-generated catch block
-//      e.printStackTrace();
-//    }
-//  }
+  public AllTheSteps() {
+    try {
+      tsHandler = new TSHandler(dbms, userquery);
+    } catch (SQLException e) {
+      // TODO Auto-generated catch block
+      e.printStackTrace();
+    }
+  }
 	
   //--------------------------------------------------------------
 	@Given("a user is a $utype")
