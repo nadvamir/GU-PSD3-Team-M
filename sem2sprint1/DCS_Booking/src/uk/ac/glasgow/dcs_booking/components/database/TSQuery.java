@@ -7,7 +7,7 @@ public interface TSQuery {
 	/**
 	 * Gets a timetable slot by the session it is associated with
 	 */
-	public TimetableSlot getTS(String sid);
+	public ArrayList<TimetableSlot> getTS(String sid);
 	
 	public ArrayList<TimetableSlot> getTSBetween(Date start, Date end);
 }

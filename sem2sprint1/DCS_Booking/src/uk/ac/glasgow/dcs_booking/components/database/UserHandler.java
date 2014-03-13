@@ -52,7 +52,7 @@ public class UserHandler implements UserAdd, UserQuery {
 		
 	}
 
-	public static User parseRow(ResultSet resultSet) throws SQLException {
+	public User parseRow(ResultSet resultSet) throws SQLException {
 		
 		String name = resultSet.getString("name");
 		

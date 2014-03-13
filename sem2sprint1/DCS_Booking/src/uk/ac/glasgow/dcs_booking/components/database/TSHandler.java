@@ -17,19 +17,21 @@ public class TSHandler implements TSAdd, TSQuery {
 	
 	private String tableName = "timetableslot";
 		
-	private static DBMS dbms;
+	private DBMS dbms;
+	private UserQuery userQuery;
 	
-	public TSHandler (DBMS dbms) throws SQLException {
+	public TSHandler (DBMS dbms, UserQuery uQuery) throws SQLException {
 		
-		TSHandler.dbms = dbms;
+		this.dbms = dbms;
+		this.userQuery = uQuery;
 		if (!TSTableExists()) {
 			createTSTable();
 		}
 	}
 	
 	@Override
-	public TimetableSlot getTS(String sessionID) {
-		TimetableSlot wanted = null;
+	public ArrayList<TimetableSlot> getTS(String sessionID) {
+		ArrayList<TimetableSlot> wanted = new ArrayList<TimetableSlot>();
 		ResultSet resultSet = null;
 		
 		try {
@@ -39,7 +41,7 @@ public class TSHandler implements TSAdd, TSQuery {
 			resultSet =	dbms.getRows(tableName, condition);
 			while (resultSet.next()) {
 				TimetableSlot currentTS = parseRow(resultSet);
-				wanted = currentTS;
+				wanted.add(currentTS);
 			}
 						
 		} catch (SQLException e) {
@@ -55,47 +57,6 @@ public class TSHandler implements TSAdd, TSQuery {
 		
 		return wanted;
 		
-	}
-
-	public static TimetableSlot parseRow(ResultSet resultSet) throws SQLException {
-		
-		Date date = resultSet.getDate("date");
-		
-		int capacity = resultSet.getInt("capacity");
-		
-		String room = resultSet.getString("compulsory");
-		
-		String tutor = resultSet.getString("tutor");
-		
-		User tutorUser = null;
-		
-		TimetableSlot r = new TimetableSlot(date,capacity,room);
-		
-		//Get the tutor
-		ResultSet tutorSet = null;
-		
-		try {
-			
-			String condition = "username='"+tutor+"'";
-			
-			tutorSet =	dbms.getRows("user", condition);
-			while (tutorSet.next()) {
-				tutorUser = UserHandler.parseRow(resultSet);
-			}
-						
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally{
-			try{
-				resultSet.close();
-			} catch(SQLException e){
-				e.printStackTrace();
-			}
-		}
-		
-		r.setTutor(tutorUser);
-
-		return r;
 	}
 	
 	@Override
@@ -126,7 +87,29 @@ public class TSHandler implements TSAdd, TSQuery {
 		
 		return wanted;
 	}
+	
+	public TimetableSlot parseRow(ResultSet resultSet) throws SQLException {
+		
+		Date date = resultSet.getDate("date");
+		
+		int capacity = resultSet.getInt("capacity");
+		
+		String room = resultSet.getString("compulsory");
+		
+		String tutor = resultSet.getString("tutor");
+		
+		User tutorUser = null;
+		
+		TimetableSlot r = new TimetableSlot(date,capacity,room);
+		
+		//Get the tutor
+		tutorUser = userQuery.getUser(tutor);
 
+		r.setTutor(tutorUser);
+
+		return r;
+	}
+	
 	@Override
 	public void	addTS(TimetableSlot s, String sid){		
 		try {		

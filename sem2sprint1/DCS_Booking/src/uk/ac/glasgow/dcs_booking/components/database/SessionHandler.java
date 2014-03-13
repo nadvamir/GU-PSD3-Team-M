@@ -14,11 +14,12 @@ public class SessionHandler implements SessionAdd, SessionQuery {
 
 	private String tableName = "session";
 
-	private static DBMS dbms;
+	private DBMS dbms;
+	private TSQuery tsQuery;
 
-	public SessionHandler (DBMS dbms) throws SQLException {
-
-		SessionHandler.dbms = dbms;
+	public SessionHandler (DBMS dbms, TSQuery tsQuery) throws SQLException {
+		this.tsQuery = tsQuery;
+		this.dbms = dbms;
 		if (!sessionTableExists())
 			createSessionTable();
 	}
@@ -55,7 +56,7 @@ public class SessionHandler implements SessionAdd, SessionQuery {
 
 	}
 
-	public static Session parseRow(ResultSet resultSet) throws SQLException {
+	public Session parseRow(ResultSet resultSet) throws SQLException {
 		ArrayList<TimetableSlot> slots = new ArrayList<TimetableSlot>();
 		String id = resultSet.getString("id");
 
@@ -68,23 +69,7 @@ public class SessionHandler implements SessionAdd, SessionQuery {
 		} else {
 			r.setCompulsary(false);
 		}
-		try {
-			String condition = "sid='"+id+"'";
-			resultSet =	dbms.getRows("timetableslot", condition);
-			while (resultSet.next()) {
-				TimetableSlot currentTimetableSlot = TSHandler.parseRow(resultSet);
-				slots.add(currentTimetableSlot);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally{
-			try{
-				resultSet.close();
-			} catch(SQLException e){
-				//TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
+		slots = tsQuery.getTS(id);
 		r.setSlots(slots);
 		return r;
 	}

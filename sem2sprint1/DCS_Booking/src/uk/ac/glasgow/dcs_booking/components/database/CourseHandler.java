@@ -15,10 +15,12 @@ public class CourseHandler implements CourseAdd, CourseQuery {
 	private String tableName = "course";
 		
 	private DBMS dbms;
+	private SessionQuery sessionQuery;
 	
-	public CourseHandler (DBMS dbms) throws SQLException {
-		
+	public CourseHandler (DBMS dbms, SessionQuery sQuery) throws SQLException {
+	
 		this.dbms = dbms;
+		this.sessionQuery = sQuery;
 		if (!courseTableExists())
 			createCourseTable();
 	}
@@ -64,23 +66,7 @@ public class CourseHandler implements CourseAdd, CourseQuery {
 		
 		Course r = new Course(id,name);
 		ArrayList<Session> sessions = new ArrayList<Session>();
-		try {
-			String condition = "cid='"+id+"'";
-			resultSet =	dbms.getRows("session", condition);
-			while (resultSet.next()) {
-				Session currentSession = SessionHandler.parseRow(resultSet);
-				sessions.add(currentSession);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally{
-			try{
-				resultSet.close();
-			} catch(SQLException e){
-				//TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
+		sessions = sessionQuery.getSession(id);
 		r.setSessions(sessions);
 		return r;
 	}

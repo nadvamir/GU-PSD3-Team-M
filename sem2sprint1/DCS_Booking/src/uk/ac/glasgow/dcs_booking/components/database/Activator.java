@@ -47,17 +47,17 @@ public class Activator implements BundleActivator {
 		addU = userHandler;
 		queryU = userHandler;
 		
-		TSHandler tsHandler = new TSHandler(dbms);
+		TSHandler tsHandler = new TSHandler(dbms, queryU);
 		
 		addTS = tsHandler;
 		queryTS = tsHandler;
 		
-		SessionHandler sessionHandler = new SessionHandler(dbms);
+		SessionHandler sessionHandler = new SessionHandler(dbms,queryTS);
 		
 		addS = sessionHandler;
 		queryS = sessionHandler;
 		
-		CourseHandler courseHandler = new CourseHandler(dbms);
+		CourseHandler courseHandler = new CourseHandler(dbms, queryS);
 		
 		addC = courseHandler;
 		queryC = courseHandler;
