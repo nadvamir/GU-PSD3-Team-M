@@ -33,4 +33,12 @@ public class TimetableSlotManagerImpl implements TimetableSlotManager {
 		return false;
 	}
 
+  public ArrayList<String[]> checkClashesForLevel(int level) {
+    // select all courses, order by ID
+    // for each one of them, get timetable slots, order doesn't matter
+    // for all the distinct pairs of courses (N*(N-1) of them) check for the
+    // clashes, populate the results array list.
+    return new ArrayList<String[]>();
+  }
+
 }
