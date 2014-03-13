@@ -142,6 +142,60 @@
 		description="Builds OSGi bundles for the project."
 		depends="compile"
 	>
+	
+		<jar update="no" destfile="admincontrols.jar" manifest="config/osgi/ADMINCONTROLS.MF">
+		
+			<fileset 
+				dir="bin/" 
+				includes="uk/ac/glasgow/dcs_booking/admincontrols/*.class"
+			/>
+		
+		</jar>
+		
+		<jar update="no" destfile="admincontrols-impl.jar" manifest="config/osgi/ADMINCONTROLS-IMPL.MF">
+		
+			<fileset 
+				dir="bin/" 
+				includes="uk/ac/glasgow/dcs_booking/admincontrols/impl/*.class"
+			/>
+		
+		</jar>
+		
+		<jar update="no" destfile="application.jar" manifest="config/osgi/APPLICATION.MF">
+		
+			<fileset 
+				dir="bin/" 
+				includes="uk/ac/glasgow/dcs_booking/components/application/*.class"
+			/>
+		
+		</jar>
+
+		<jar update="no" destfile="database.jar" manifest="config/osgi/DATABASE.MF">
+		
+			<fileset 
+				dir="bin/" 
+				includes="uk/ac/glasgow/dcs_booking/components/database/*.class"
+			/>
+		
+		</jar>
+
+		<jar update="no" destfile="lecturercontrols.jar" manifest="config/osgi/LECTURERCONTROLS.MF">
+		
+			<fileset 
+				dir="bin/" 
+				includes="uk/ac/glasgow/dcs_booking/components/lecturercontrols/*.class"
+			/>
+		
+		</jar>		
+		
+		<jar update="no" destfile="lecturercontrols-impl.jar" manifest="config/osgi/LECTURERCONTROLS-IMPL.MF">
+		
+			<fileset 
+				dir="bin/" 
+				includes="uk/ac/glasgow/dcs_booking/components/lecturercontrols/impl/*.class"
+			/>
+		
+		</jar>	
 
 		<jar update="no" destfile="login.jar" manifest="config/osgi/LOGIN.MF">
 			
@@ -161,59 +215,23 @@
 		
 		</jar>
 
-		<jar update="no" destfile="coursemanager.jar" manifest="config/osgi/COURSEMANAGER.MF">
+		<jar update="no" destfile="studentcontrols.jar" manifest="config/osgi/STUDENTCONTROLS.MF">
 		
 			<fileset 
 				dir="bin/" 
-				includes="uk/ac/glasgow/dcs_booking/components/coursemanager/*.class"
-			/>
-		
-		</jar>		
-
-		<jar update="no" destfile="application.jar" manifest="config/osgi/APPLICATION.MF">
-		
-			<fileset 
-				dir="bin/" 
-				includes="uk/ac/glasgow/dcs_booking/components/application/*.class"
-			/>
-		
-		</jar>
-
-		<jar update="no" destfile="booking.jar" manifest="config/osgi/BOOKING.MF">
-		
-			<fileset 
-				dir="bin/" 
-				includes="uk/ac/glasgow/dcs_booking/components/booking/*.class"
+				includes="uk/ac/glasgow/dcs_booking/components/studentcontrols/*.class"
 			/>
 		
 		</jar>		
 		
-		<jar update="no" destfile="booking-impl.jar" manifest="config/osgi/BOOKING-IMPL.MF">
+		<jar update="no" destfile="studentcontrols-impl.jar" manifest="config/osgi/STUDENTCONTROLS-IMPL.MF">
 		
 			<fileset 
 				dir="bin/" 
-				includes="uk/ac/glasgow/dcs_booking/components/booking/impl/*.class"
+				includes="uk/ac/glasgow/dcs_booking/components/studentcontrols/impl/*.class"
 			/>
 		
-		</jar>	
-
-		<jar update="no" destfile="database.jar" manifest="config/osgi/DATABASE.MF">
-		
-			<fileset 
-				dir="bin/" 
-				includes="uk/ac/glasgow/dcs_booking/components/database/*.class"
-			/>
-		
-		</jar>	
-		
-		<jar update="no" destfile="roomassignment.jar" manifest="config/osgi/ROOMASSIGNMENT.MF">
-		
-			<fileset 
-				dir="bin/" 
-				includes="uk/ac/glasgow/dcs_booking/roomassignment/*.class"
-			/>
-		
-		</jar>
+		</jar>		
 
 	</target>
 	

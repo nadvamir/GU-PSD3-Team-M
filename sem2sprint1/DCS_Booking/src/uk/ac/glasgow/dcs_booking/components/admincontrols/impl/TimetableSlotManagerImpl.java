@@ -1,8 +1,9 @@
-package uk.ac.glasgow.dcs_booking.components.roomassignment;
+package uk.ac.glasgow.dcs_booking.components.admincontrols.impl;
 
 import java.util.ArrayList;
 import java.util.Date;
 
+import uk.ac.glasgow.dcs_booking.components.admincontrols.TimetableSlotManager;
 import uk.ac.glasgow.dcs_booking.components.database.Session;
 import uk.ac.glasgow.dcs_booking.components.database.TSAdd;
 import uk.ac.glasgow.dcs_booking.components.database.TSQuery;
@@ -32,5 +33,13 @@ public class TimetableSlotManagerImpl implements TimetableSlotManager {
 		// TODO Auto-generated method stub
 		return false;
 	}
+
+  public ArrayList<String[]> checkClashesForLevel(int level) {
+    // select all courses, order by ID
+    // for each one of them, get timetable slots, order doesn't matter
+    // for all the distinct pairs of courses (N*(N-1) of them) check for the
+    // clashes, populate the results array list.
+    return new ArrayList<String[]>();
+  }
 
 }

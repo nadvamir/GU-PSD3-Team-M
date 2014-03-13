@@ -1,4 +1,4 @@
-package uk.ac.glasgow.dcs_booking.components.coursemanager;
+package uk.ac.glasgow.dcs_booking.components.lecturercontrols.impl;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
@@ -6,6 +6,7 @@ import org.osgi.framework.ServiceReference;
 import org.osgi.framework.ServiceRegistration;
 
 import uk.ac.glasgow.dcs_booking.components.database.DBMS;
+import uk.ac.glasgow.dcs_booking.components.lecturercontrols.CourseManager;
 import uk.ac.glasgow.dcs_booking.components.mcwrapper.MyCampusWrapper;
 
 

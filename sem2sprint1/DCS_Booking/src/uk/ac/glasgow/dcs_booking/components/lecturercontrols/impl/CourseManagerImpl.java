@@ -1,10 +1,11 @@
-package uk.ac.glasgow.dcs_booking.components.coursemanager;
+package uk.ac.glasgow.dcs_booking.components.lecturercontrols.impl;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import uk.ac.glasgow.dcs_booking.components.database.Course;
 import uk.ac.glasgow.dcs_booking.components.database.Session;
+import uk.ac.glasgow.dcs_booking.components.lecturercontrols.CourseManager;
 import uk.ac.glasgow.dcs_booking.components.mcwrapper.MyCampusCourse;
 import uk.ac.glasgow.dcs_booking.components.mcwrapper.MyCampusWrapper;
 
