@@ -130,7 +130,7 @@
 		
 		<junit>
 			
-			<test name="components.test.DCSStories"/>
+            <test name="uk.ac.glasgow.dcs_booking.components.test.DCSStories"/>
 			<classpath refid="project.classpath"/>
 		</junit>
 				
