@@ -1,6 +1,7 @@
 package uk.ac.glasgow.dcs_booking.components.studentcontrols;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import uk.ac.glasgow.dcs_booking.components.database.Course;
 import uk.ac.glasgow.dcs_booking.components.database.Session;
@@ -12,18 +13,23 @@ public interface Booker {
 	
 	/**
 	 * 
-	 * @param ts is TimeTable slot being checked
-	 * @return true/false if slot is full/not
+	 * @param sid is Session ID of session where the Timetable Slot exists
+	 * @param room is Timetable Slot's room
+	 * @param data is Timetable Slot's date
+	 * @return true/false if slot is full/not, will return true if TimetableSlot doesn't exist
 	 */
-	public boolean slotIsFull(TimetableSlot ts);
+	public boolean slotIsFull(String sid, String room, Date date);
 	
 	/**
 	 * 
 	 * @param student is student to add
+	 * @param sid is Session ID of session where the Timetable Slot exists
+	 * @param room is Timetable Slot's room
+	 * @param data is Timetable Slot's date
 	 * @param ts is TimetableSlot to add to
 	 * @return true/false is successful/unsuccessful
 	 */
-	public boolean book(User student, TimetableSlot ts);
+	public boolean book(User student, String sid, String room, Date date);
 	
 	/**
 	 *
@@ -41,9 +47,11 @@ public interface Booker {
 	
 	/**
 	 * 
-	 * @param ts is TimetableSlot being queried for info
+	 * @param sid is Session ID of session where the Timetable Slot exists
+	 * @param room is Timetable Slot's room
+	 * @param data is Timetable Slot's date
 	 * @return a string containing time, location, students and tutor
 	 */
-	public String getInfo(TimetableSlot ts);
+	public String getInfo(String sid, String room, Date date);
 
 }
