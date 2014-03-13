@@ -16,6 +16,7 @@ import org.osgi.framework.BundleContext;
 
 // admin controls
 import uk.ac.glasgow.dcs_booking.components.admincontrols.impl.TimetableSlotManagerImpl;
+import uk.ac.glasgow.dcs_booking.components.admincontrols.TimetableSlotManager;
 
 // lecturer controls
 import uk.ac.glasgow.dcs_booking.components.mcwrapper.impl.MyCampusController;
@@ -53,6 +54,7 @@ public class AllTheSteps {
   private User user;
   private Exception e = null;
   private Boolean boolAnsw = false;
+  private int resLen; // length of the result, if it is an array or similar
   
   private Session session;
   private TimetableSlot slot;
@@ -64,10 +66,6 @@ public class AllTheSteps {
   private boolean timetableSlotExists;
   private boolean roomAssigned;
   private boolean detailsAreShown;
-  
-  // lecturer controls-specific variables
-	private MyCampusWrapper mcc = new MyCampusController();
-  private CourseManager cmng = new CourseManagerImpl(mcc);
   
   // ONE DATABASE INTERFACE THAT HANDLED ALL OF THESE WOULD BE GOOD!
   // YES, IT PROBABLY WOULD BE
@@ -81,6 +79,13 @@ public class AllTheSteps {
   public static CourseAdd courseadd;
   public static UserQuery userquery;
   public static UserAdd useradd;
+  
+  // admin contols-specific variables
+  private TimetableSlotManager tsm = new TimetableSlotManagerImpl();
+
+  // lecturer controls-specific variables
+	private MyCampusWrapper mcc = new MyCampusController();
+  private CourseManager cmng = new CourseManagerImpl(mcc);
   
   //for 4.
   private User currentuser;
@@ -506,18 +511,32 @@ public class AllTheSteps {
 	}
 
   //--------------------------------------------------------------
+  // additional test case
   @Given("there are $num clashes")
   public void thereAreSomeClashes(Integer num) {
     // injects some amount of clashed nonsense courses in the database
+    _populateGoodCourses();
+    for (int i = 0; i < num; i++)
+      _generateClash();
+  }
+  private void _populateGoodCourses() {
+    // update database with the hardcoded non-clashing courses
+  }
+  private void _generateClash() {
+    // 1. create two random course names, add them to DB for level 1
+    // 2. create a few timetable slots for each, outside GoodCourses range
+    // 3. share an additional timetable slot between those two
   }
 
   @When("they check for clashes")
   public void checkForClashes() {
     // call the checking api
+    this.resLen = tsm.checkClashesForLevel(1).size();
   }
 
   @Then("they see $num clashes")
   public void inspectClashResult(Integer num) {
     // check the result of last action
   }
+
 }
