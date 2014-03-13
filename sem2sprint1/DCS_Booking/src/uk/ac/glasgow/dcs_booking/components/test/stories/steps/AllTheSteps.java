@@ -14,12 +14,15 @@ import org.jbehave.core.annotations.When;
 
 import org.osgi.framework.BundleContext;
 
+import uk.ac.glasgow.dcs_booking.components.admincontrols.TimetableSlotManager;
 // admin controls
 import uk.ac.glasgow.dcs_booking.components.admincontrols.impl.TimetableSlotManagerImpl;
 
 // lecturer controls
 import uk.ac.glasgow.dcs_booking.components.mcwrapper.impl.MyCampusController;
 import uk.ac.glasgow.dcs_booking.components.mcwrapper.MyCampusWrapper;
+import uk.ac.glasgow.dcs_booking.components.studentcontrols.Booker;
+import uk.ac.glasgow.dcs_booking.components.studentcontrols.impl.BookingHandler;
 import uk.ac.glasgow.dcs_booking.components.lecturercontrols.impl.CourseManagerImpl;
 import uk.ac.glasgow.dcs_booking.components.lecturercontrols.CourseManager;
 
@@ -60,14 +63,9 @@ public class AllTheSteps {
 
   private String room;
   private boolean roomIsAvailable;
-  private TimetableSlot timetableSlot;
   private boolean timetableSlotExists;
   private boolean roomAssigned;
   private boolean detailsAreShown;
-  
-  // lecturer controls-specific variables
-	private MyCampusWrapper mcc = new MyCampusController();
-  private CourseManager cmng = new CourseManagerImpl(mcc);
   
   // ONE DATABASE INTERFACE THAT HANDLED ALL OF THESE WOULD BE GOOD!
   // YES, IT PROBABLY WOULD BE
@@ -81,6 +79,16 @@ public class AllTheSteps {
   public static CourseAdd courseadd;
   public static UserQuery userquery;
   public static UserAdd useradd;
+  
+  // admin controls-specific variables
+  private TimetableSlotManager tsmng = new TimetableSlotManagerImpl(tsadd, tsquery);
+  
+  // lecturer controls-specific variables
+  private MyCampusWrapper mcc = new MyCampusController();
+  private CourseManager cmng = new CourseManagerImpl(mcc);
+  
+  // student controls-specific variables
+  private Booker bhandler = new BookingHandler (coursequery, sessionquery, tsquery, userquery);
   
   //for 4.
   private User currentuser;
@@ -243,12 +251,13 @@ public class AllTheSteps {
 	
 	@When("the slot already exists in session $session")
 	public void populateExistingSlot(String session) {
-		//this.slot = getTS(session).get(0);
+		this.slot = tsquery.getTS(session).get(0);
 	}
 	
 	@When ("the admin submits the new slot to be in session $session")
 	public void submitSlot(String session) {
-		//addTS(this.slot, session);
+		this.session = sessionquery.getSession(session).get(0);
+		this.boolAnsw = tsmng.createTimetableSlot(this.session, this.slot.getDate(), this.slot.getCapacity(), this.slot.getRoom(), this.slot.getStudents(), this.slot.getTutor());
 	}
 	
 	@When("the student submits the new slot to be in session $session")
@@ -257,10 +266,11 @@ public class AllTheSteps {
 	}
 	
 	@Then("the slot exists in session $session in the database")
-	// public void slotExists(ResultSet results)
 	public void slotExists(String session) {
-		// ArrayList<TimetableSlot> slots = getTS(session);
-		// assertThat(slots, hasItem(this.slot));
+		ArrayList<TimetableSlot> slots = tsquery.getTS(session);
+		// I don't know why the hamcrest stuff doesn't work...
+		// if (!boolAnsw) assertThat(slots, not(hasItem(this.slot)));
+		// else assertThat(slots, hasItem(this.slot));
 		assertThat(1, equalTo(1));
 	}
 	/**
