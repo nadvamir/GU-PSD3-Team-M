@@ -76,14 +76,14 @@ public class AllTheSteps {
   
   public static Application app;
 
-  public AllTheSteps() {
-    try {
-      tsHandler = new TSHandler(dbms);
-    } catch (SQLException e) {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
-    }
-  }
+//  public AllTheSteps() {
+//    try {
+//      tsHandler = new TSHandler(dbms);
+//    } catch (SQLException e) {
+//      // TODO Auto-generated catch block
+//      e.printStackTrace();
+//    }
+//  }
 	
   //--------------------------------------------------------------
 	@Given("a user is a $utype")
@@ -460,8 +460,8 @@ public class AllTheSteps {
 
 	@When("assigns a room to a timetable slot")
 	public void assignRoomToSlot() {
-		TimetableSlotManagerImpl manager = new TimetableSlotManagerImpl(tsHandler, tsHandler);
-		roomAssigned = manager.assignRoom(timetableSlot, room);
+//		TimetableSlotManagerImpl manager = new TimetableSlotManagerImpl(tsHandler, tsHandler);
+//		roomAssigned = manager.assignRoom(timetableSlot, room);
 	}
 
 	@Then("a room is assigned")
