@@ -171,12 +171,12 @@ public class DBMS {
 		throws SQLException{
 		
 		String statementString =
-			"CREATE TABLE "+tableName +
-		    "  (" + specification +"  )"; 
-		 
+			"CREATE TABLE "+tableName+
+		    " (" + specification +")"; 
+		 System.out.println(statementString);
 		Connection connection =
 			getDatabaseConnection();
-			
+		
 		Statement statement = connection.createStatement();
 		statement.execute(statementString);
 

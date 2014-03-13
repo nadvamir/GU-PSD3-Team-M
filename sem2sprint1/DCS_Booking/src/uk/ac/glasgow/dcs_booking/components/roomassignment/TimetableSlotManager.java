@@ -11,7 +11,7 @@ import uk.ac.glasgow.dcs_booking.components.database.User;
 public interface TimetableSlotManager {
 	
 	/**
-	 * Create a Timetable Slot and add it to a session
+	 * Create a Timetable Slot and add it to a session.
 	 * @param session
 	 * @param date
 	 * @param capacity
@@ -23,11 +23,17 @@ public interface TimetableSlotManager {
 	public boolean createTimetableSlot(Session session, Date date, int capacity, String room, ArrayList<User> students, User tutor);
 
 	/**
-	 * Assign a room to a timetable slot
+	 * Assign a room to a timetable slot.
 	 * @param ts is TimetableSlot
 	 * @param room is String form of room
 	 * @return true/false if successful/unsuccessful
 	 */
 	public boolean assignRoom(TimetableSlot ts, String room);
 	
+  /**
+   * Check if there are any clashes between courses for the given level.
+   * @param level which level to check for collisions
+   * @return list of clashing course pairs    */
+  public ArrayList<String[]> checkClashesForLevel(int level);
+
 }
