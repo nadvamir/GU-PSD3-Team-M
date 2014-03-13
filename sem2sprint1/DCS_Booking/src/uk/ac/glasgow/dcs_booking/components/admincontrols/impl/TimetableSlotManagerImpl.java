@@ -15,6 +15,9 @@ public class TimetableSlotManagerImpl implements TimetableSlotManager {
 	private TSAdd adder;
 	private TSQuery getter;
 	
+  public TimetableSlotManagerImpl() {
+    // create adder/getter by yourself
+  }
 	public TimetableSlotManagerImpl(TSAdd adder, TSQuery getter) {
 		this.adder = adder;
 		this.getter = getter;
