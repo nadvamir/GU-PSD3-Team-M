@@ -33,8 +33,14 @@ public class TimetableSlotManagerImpl implements TimetableSlotManager {
 
 	@Override
 	public boolean assignRoom(TimetableSlot ts, String room) {
-		// TODO Auto-generated method stub
-		return false;
+		if (ts == null) {
+			return false;
+		}
+		if (room == null) {
+			return false;
+		}
+		//assign
+		return true;
 	}
 
   public ArrayList<String[]> checkClashesForLevel(int level) {

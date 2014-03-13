@@ -446,53 +446,6 @@ public class AllTheSteps {
     // TODO
   }
 
-
-//--------------------------------------------------------------
-	@Given("a user is not an admin")
-	public void usetNotAdmin() {
-		this.user = new User("lecturer", Type.LECTURER);
-	}
-
-	@Given("a room is available")
-	public void roomIsAvailable() {
-		roomIsAvailable = true;
-		room = "room407";
-	}
-
-	@Given("a room is not available")
-	public void roomIsNotAvailable() {
-		roomIsAvailable = false;
-		room = "";
-	}
-
-	@Given("a timetable slot exists")
-	public void timetableSlotExists() {
-		timetableSlotExists = true;
-		timetableSlot = new TimetableSlot(new Date(), 100, room);
-	}	
-
-	@Given("a timetable slot does not exist")
-	public void timetableSlotDoesNotExist() {
-		timetableSlotExists = false;
-		timetableSlot = null;
-	}
-
-	@When("assigns a room to a timetable slot")
-	public void assignRoomToSlot() {
-//		TimetableSlotManagerImpl manager = new TimetableSlotManagerImpl(tsHandler, tsHandler);
-//		roomAssigned = manager.assignRoom(timetableSlot, room);
-	}
-
-	@Then("a room is assigned")
-	public void roomAssigned() {
-		// assertThat(roomAssigned, equalTo(true));
-		assertThat(true, equalTo(true));
-	}
-
-	@Then("a room is not assigned")
-	public void roomNotAssigned() {
-		assertThat(roomAssigned, equalTo(false));
-	}	
   //--------------------------------------------------------------
 
 	@Given("any user")
