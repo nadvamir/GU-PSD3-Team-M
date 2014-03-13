@@ -12,11 +12,11 @@ import org.jbehave.core.annotations.When;
 
 import uk.ac.glasgow.dcs_booking.components.admincontrols.impl.TimetableSlotManagerImpl;
 import uk.ac.glasgow.dcs_booking.components.database.DBMS;
-import uk.ac.glasgow.dcs_booking.components.database.TSHandler;
 import uk.ac.glasgow.dcs_booking.components.database.TimetableSlot;
 import uk.ac.glasgow.dcs_booking.components.database.User;
-import uk.ac.glasgow.dcs_booking.components.database.UserHandler;
 import uk.ac.glasgow.dcs_booking.components.database.User.Type;
+import uk.ac.glasgow.dcs_booking.components.database.impl.TSHandler;
+import uk.ac.glasgow.dcs_booking.components.database.impl.UserHandler;
 
 
 public class Story_8 {

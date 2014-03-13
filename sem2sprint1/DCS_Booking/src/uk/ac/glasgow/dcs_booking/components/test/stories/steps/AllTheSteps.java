@@ -11,25 +11,13 @@ import java.util.Date;
 import org.jbehave.core.annotations.Given;
 import org.jbehave.core.annotations.Then;
 import org.jbehave.core.annotations.When;
-
 import org.osgi.framework.BundleContext;
 
 import uk.ac.glasgow.dcs_booking.components.admincontrols.TimetableSlotManager;
 // admin controls
 import uk.ac.glasgow.dcs_booking.components.admincontrols.impl.TimetableSlotManagerImpl;
-import uk.ac.glasgow.dcs_booking.components.admincontrols.TimetableSlotManager;
-
-// lecturer controls
-import uk.ac.glasgow.dcs_booking.components.mcwrapper.impl.MyCampusController;
-import uk.ac.glasgow.dcs_booking.components.mcwrapper.MyCampusWrapper;
-import uk.ac.glasgow.dcs_booking.components.studentcontrols.Booker;
-import uk.ac.glasgow.dcs_booking.components.studentcontrols.impl.BookingHandler;
-import uk.ac.glasgow.dcs_booking.components.lecturercontrols.impl.CourseManagerImpl;
-import uk.ac.glasgow.dcs_booking.components.lecturercontrols.CourseManager;
-
 // application
 import uk.ac.glasgow.dcs_booking.components.application.Application;
-
 // database
 import uk.ac.glasgow.dcs_booking.components.database.Course;
 import uk.ac.glasgow.dcs_booking.components.database.CourseAdd;
@@ -42,10 +30,17 @@ import uk.ac.glasgow.dcs_booking.components.database.TSAdd;
 import uk.ac.glasgow.dcs_booking.components.database.TSQuery;
 import uk.ac.glasgow.dcs_booking.components.database.TimetableSlot;
 import uk.ac.glasgow.dcs_booking.components.database.User;
+import uk.ac.glasgow.dcs_booking.components.database.User.Type;
 import uk.ac.glasgow.dcs_booking.components.database.UserAdd;
 import uk.ac.glasgow.dcs_booking.components.database.UserQuery;
-import uk.ac.glasgow.dcs_booking.components.database.User.Type;
 import uk.ac.glasgow.dcs_booking.components.database.impl.TSHandler;
+import uk.ac.glasgow.dcs_booking.components.lecturercontrols.CourseManager;
+import uk.ac.glasgow.dcs_booking.components.lecturercontrols.impl.CourseManagerImpl;
+import uk.ac.glasgow.dcs_booking.components.mcwrapper.MyCampusWrapper;
+// lecturer controls
+import uk.ac.glasgow.dcs_booking.components.mcwrapper.impl.MyCampusController;
+import uk.ac.glasgow.dcs_booking.components.studentcontrols.Booker;
+import uk.ac.glasgow.dcs_booking.components.studentcontrols.impl.BookingHandler;
 
 
 
