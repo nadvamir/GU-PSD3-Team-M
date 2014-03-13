@@ -161,14 +161,23 @@
 		
 		</jar>
 
-		<jar update="no" destfile="coursemanager.jar" manifest="config/osgi/COURSEMANAGER.MF">
+		<jar update="no" destfile="lecturercontrols.jar" manifest="config/osgi/LECTURERCONTROLS.MF">
 		
 			<fileset 
 				dir="bin/" 
-				includes="uk/ac/glasgow/dcs_booking/components/coursemanager/*.class"
+				includes="uk/ac/glasgow/dcs_booking/components/lecturercontrols/*.class"
 			/>
 		
 		</jar>		
+		
+		<jar update="no" destfile="lecturercontrols-impl.jar" manifest="config/osgi/LECTURERCONTROLS-IMPL.MF">
+		
+			<fileset 
+				dir="bin/" 
+				includes="uk/ac/glasgow/dcs_booking/components/lecturercontrols/impl/*.class"
+			/>
+		
+		</jar>	
 
 		<jar update="no" destfile="application.jar" manifest="config/osgi/APPLICATION.MF">
 		

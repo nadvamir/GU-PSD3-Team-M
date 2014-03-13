@@ -1,4 +1,4 @@
-package uk.ac.glasgow.dcs_booking.components.coursemanager;
+package uk.ac.glasgow.dcs_booking.components.lecturercontrols;
 
 import java.util.ArrayList;
 import java.util.List;
